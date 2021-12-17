@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
-import { reset } from 'styled-reset'
- 
+import { createGlobalStyle } from "styled-components";
+import { reset } from "styled-reset";
+
 export const GlobalStyle = createGlobalStyle`
   ${reset}
  
@@ -10,6 +10,9 @@ export const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding: 24px;
+    min-height: 100vh;
+    height: 100vh;
   }
   
   code {
@@ -20,4 +23,4 @@ export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-`
+`;
