@@ -10,4 +10,9 @@ const Root = () => (
   </React.Fragment>
 );
 
-ReactDOM.render(<Root />, document.querySelector("#root"));
+export default Root;
+
+ReactDOM.render(
+  <Root />,
+  document.querySelector("#root") || document.createElement("div") // for testing
+);

@@ -26,7 +26,7 @@ export const Title = styled.p`
   font-size: 15px;
   line-height: 19px;
   text-align: center;
-  color: #7191a5;
+  color: #7191a5;np
 `;
 
 export const Value = styled.p`
