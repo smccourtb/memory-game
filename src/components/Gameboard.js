@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 import Option from "./Option";
 
-const GameBoard = () => {
+const GameBoard = ({ test }) => {
   // create an array with the length of 16.
   // create 8 pairs of numbers (array.length/2)
-  function createBoard(length) {
+  function createBoard(boardSize) {
     let boardArray = [];
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < boardSize; i++) {
       boardArray.push(i, i);
     }
     return boardArray;
@@ -23,9 +23,8 @@ const GameBoard = () => {
   }
 
   const board = shuffleArray(createBoard(16 / 2));
-
-  const choices = board.map((option, index) => (
-    <Option key={index} value={option} />
+  const choices = board.map((optionValue, index) => (
+    <Option key={index} value={optionValue} test={test} />
   ));
   return <BoardContainer>{choices}</BoardContainer>;
 };
