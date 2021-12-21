@@ -4,7 +4,7 @@ import { Container, Img, MenuButton } from "../styles/Header.js";
 const Header = () => {
   return (
     <Container>
-      <Img src={Logo}></Img>
+      <Img src={Logo} />
       <MenuButton>Menu</MenuButton>
     </Container>
   );

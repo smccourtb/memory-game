@@ -3,7 +3,7 @@ import "jest-styled-components";
 import { render, screen } from "@testing-library/react";
 
 describe("renders <Footer />", () => {
-  it("Time container succesfully rendered", () => {
+  it("Time container successfully rendered", () => {
     const { getByRole } = render(<Footer />);
     expect(getByRole("time-container"));
   });
@@ -12,7 +12,7 @@ describe("renders <Footer />", () => {
     expect(screen.getByText(/time/i)).toHaveTextContent("Time");
   });
 
-  it("Moves container succesfully rendered", () => {
+  it("Moves container successfully rendered", () => {
     const { getByRole } = render(<Footer />);
     expect(getByRole("moves-container"));
   });
