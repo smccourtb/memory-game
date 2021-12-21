@@ -1,4 +1,6 @@
 import { BoardContainer } from "../styles/Gameboard";
+import PropTypes from "prop-types";
+
 import Option from "./Option";
 
 const GameBoard = () => {
@@ -26,6 +28,10 @@ const GameBoard = () => {
     <Option key={index} value={option} />
   ));
   return <BoardContainer>{choices}</BoardContainer>;
+};
+
+GameBoard.propTypes = {
+  test: PropTypes.func,
 };
 
 export default GameBoard;
