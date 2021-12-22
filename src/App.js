@@ -3,7 +3,7 @@ import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
 import styled from "styled-components";
 import FontStyles from "./fontStyles";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -19,28 +19,29 @@ const Container = styled.div`
 
 function App() {
   const [moveCount, setMoveCount] = useState(0);
-  const [time, setTime] = useState("0:00");
+  const [time, setTime] = useState(0);
+  const [complete, setComplete] = useState(false);
 
-  const startTimer = () => {
-    const startTime = Math.floor(Date.now() / 1000); // Get the starting time (right now) in seconds
-    updateTime(startTime); // set a timeout to update the timer
+  // #####################################################################//
+  const countRef = useRef(null);
+
+  const handleStart = () => {
+    countRef.current = setInterval(() => {
+      setTime((prevTime) => prevTime + 1);
+    }, 1000);
   };
 
-  const checkTime = (i) => {
-    if (i < 10) {
-      i = "0" + i;
-    } // add zero in front of numbers < 10
-    return i;
+  const handleStop = () => {
+    clearInterval(countRef.current);
+    setComplete(true);
   };
 
-  const updateTime = (startTime) => {
-    const now = Math.floor(Date.now() / 1000); // get the time now
-    const diff = now - startTime; // diff in seconds between now and start
-    const m = Math.floor(diff / 60); // get minutes value (quotient of diff)
-    let s = Math.floor(diff % 60); // get seconds value (remainder of diff)
-    s = checkTime(s); // add a leading zero if it's single digit
-    setTime(m + ":" + s); // update time for footer display
-    setTimeout(() => updateTime(startTime), 500); // set a timeout to update the timer
+  const formatTime = (timeToFormat) => {
+    const getSeconds = `0${timeToFormat % 60}`.slice(-2);
+    const minutes = `${Math.floor(timeToFormat / 60)}`;
+    const getMinutes = `${minutes % 60}`.slice(-2);
+
+    return `${getMinutes} : ${getSeconds}`;
   };
 
   return (
@@ -48,11 +49,16 @@ function App() {
       <FontStyles />
       <Header />
       <Gameboard
-        time={time}
-        startTimer={startTimer}
+        time={formatTime(time)}
+        startTimer={handleStart}
         setMoveCount={setMoveCount}
+        stopTimer={handleStop}
       />
-      <Footer moveCount={moveCount} time={time} />
+      <Footer
+        moveCount={moveCount}
+        time={formatTime(time)}
+        complete={complete}
+      />
     </Container>
   );
 }

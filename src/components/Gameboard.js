@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Option from "./Option";
 
 // TODO: change test prop name
-const GameBoard = ({ startTimer, setMoveCount, time }) => {
+const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
   const [picked, setPicked] = useState([]);
   const [matches, setMatches] = useState([]);
 
@@ -35,9 +35,13 @@ const GameBoard = ({ startTimer, setMoveCount, time }) => {
         setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
       }
       setMoveCount((prevCount) => prevCount + 1);
+      if (matches.length === 14) {
+        console.log("YOU WIN");
+        stopTimer();
+      }
       return () => clearTimeout(timer);
     }
-    if (time === "0:00" && picked.length > 0) {
+    if (time === "0 : 00" && picked.length > 0) {
       startTimer();
     }
   }, [picked]);
@@ -60,6 +64,7 @@ GameBoard.propTypes = {
   startTimer: PropTypes.func,
   setMoveCount: PropTypes.func,
   time: PropTypes.string,
+  stopTimer: PropTypes.func,
 };
 
 export default GameBoard;
