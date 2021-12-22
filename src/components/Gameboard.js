@@ -1,13 +1,17 @@
 import { BoardContainer } from "../styles/Gameboard";
 import PropTypes from "prop-types";
-
+import { useState, useEffect } from "react";
 import Option from "./Option";
 
+// TODO: change test prop name
 const GameBoard = ({ test }) => {
+  const [picked, setPicked] = useState([]);
+  const [board] = useState(shuffleArray(createBoard(16 / 2)));
+
   // create an array with the length of 16.
   // create 8 pairs of numbers (array.length/2)
   function createBoard(boardSize) {
-    let boardArray = [];
+    const boardArray = [];
     for (let i = 0; i < boardSize; i++) {
       boardArray.push(i, i);
     }
@@ -22,9 +26,28 @@ const GameBoard = ({ test }) => {
     return array;
   }
 
-  const board = shuffleArray(createBoard(16 / 2));
+  useEffect(() => {
+    console.log("in here");
+    if (picked.length >= 2) {
+      if (picked[0] === picked[1]) {
+        console.log("tHEY MATCH");
+      } else {
+        setPicked([]);
+      }
+      //compare the 2 choices
+      // if they match, set the choice permanently
+      //if not flip them back over and set selectionCount to zero
+    }
+  }, [picked]);
+
   const choices = board.map((optionValue, index) => (
-    <Option key={index} value={optionValue} test={test} />
+    <Option
+      key={index}
+      value={optionValue}
+      test={test}
+      setPicked={setPicked}
+      picked={picked}
+    />
   ));
   return <BoardContainer>{choices}</BoardContainer>;
 };
