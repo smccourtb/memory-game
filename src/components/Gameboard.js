@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Option from "./Option";
 
 // TODO: change test prop name
-const GameBoard = ({ test }) => {
+const GameBoard = ({ test, setMoveCount }) => {
   const [picked, setPicked] = useState([]);
   const [matches, setMatches] = useState([]);
   const [board] = useState(shuffleArray(createBoard(16 / 2)));
@@ -33,9 +33,7 @@ const GameBoard = ({ test }) => {
         setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
       }
       setPicked([]);
-      //compare the 2 choices
-      // if they match, set the choice permanently
-      //if not flip them back over and set selectionCount to zero
+      setMoveCount((prevCount) => prevCount + 1);
     }
   }, [picked]);
 
@@ -55,6 +53,7 @@ const GameBoard = ({ test }) => {
 
 GameBoard.propTypes = {
   test: PropTypes.func,
+  setMoveCount: PropTypes.func,
 };
 
 export default GameBoard;

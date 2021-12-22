@@ -1,6 +1,7 @@
 import { Container, DataContainer, Title, Value } from "../styles/Footer";
+import PropTypes from "prop-types";
 
-const Footer = () => {
+const Footer = ({ moveCount }) => {
   return (
     <Container>
       <DataContainer role="time-container">
@@ -9,10 +10,12 @@ const Footer = () => {
       </DataContainer>
       <DataContainer role="moves-container">
         <Title>Moves</Title>
-        <Value>39</Value>
+        <Value>{moveCount}</Value>
       </DataContainer>
     </Container>
   );
 };
-
+Footer.propTypes = {
+  moveCount: PropTypes.number,
+};
 export default Footer;

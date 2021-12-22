@@ -3,6 +3,7 @@ import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
 import styled from "styled-components";
 import FontStyles from "./fontStyles";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -36,12 +37,14 @@ function checkTime(i) {
 }
 
 function App() {
+  const [moveCount, setMoveCount] = useState(0);
+
   return (
     <Container>
       <FontStyles />
       <Header />
-      <Gameboard test={startTimer} />
-      <Footer />
+      <Gameboard test={startTimer} setMoveCount={setMoveCount} />
+      <Footer moveCount={moveCount} />
     </Container>
   );
 }

@@ -13,7 +13,6 @@ const Option = ({ index, value, setPicked, picked, matches }) => {
   };
 
   useEffect(() => {
-    console.log(picked.length);
     if (picked.length === 2) {
       setChosen(false);
     }
