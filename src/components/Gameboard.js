@@ -6,6 +6,7 @@ import Option from "./Option";
 // TODO: change test prop name
 const GameBoard = ({ test }) => {
   const [picked, setPicked] = useState([]);
+  const [matches, setMatches] = useState([]);
   const [board] = useState(shuffleArray(createBoard(16 / 2)));
 
   // create an array with the length of 16.
@@ -27,13 +28,11 @@ const GameBoard = ({ test }) => {
   }
 
   useEffect(() => {
-    console.log("in here");
     if (picked.length >= 2) {
-      if (picked[0] === picked[1]) {
-        console.log("tHEY MATCH");
-      } else {
-        setPicked([]);
+      if (picked[0].value === picked[1].value) {
+        setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
       }
+      setPicked([]);
       //compare the 2 choices
       // if they match, set the choice permanently
       //if not flip them back over and set selectionCount to zero
@@ -43,10 +42,12 @@ const GameBoard = ({ test }) => {
   const choices = board.map((optionValue, index) => (
     <Option
       key={index}
+      index={index}
       value={optionValue}
       test={test}
       setPicked={setPicked}
       picked={picked}
+      matches={matches}
     />
   ));
   return <BoardContainer>{choices}</BoardContainer>;

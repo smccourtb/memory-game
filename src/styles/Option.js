@@ -13,7 +13,7 @@ export const Container = styled.button`
             background-color: #304859;
           }
         `};
-  background-color: #304859;
+  ${(props) => props.matches && css`{background-color: #BCCED9`};
   border-radius: 50%;
   height: 100%;
   width: 100%;
