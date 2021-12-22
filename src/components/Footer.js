@@ -1,12 +1,12 @@
 import { Container, DataContainer, Title, Value } from "../styles/Footer";
 import PropTypes from "prop-types";
 
-const Footer = ({ moveCount }) => {
+const Footer = ({ moveCount, time }) => {
   return (
     <Container>
       <DataContainer role="time-container">
         <Title>Time</Title>
-        <Value>1:53</Value>
+        <Value>{time}</Value>
       </DataContainer>
       <DataContainer role="moves-container">
         <Title>Moves</Title>
@@ -17,5 +17,6 @@ const Footer = ({ moveCount }) => {
 };
 Footer.propTypes = {
   moveCount: PropTypes.number,
+  time: PropTypes.string,
 };
 export default Footer;

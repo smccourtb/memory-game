@@ -15,36 +15,44 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const startTime = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
 // localStorage.setItem("startTime", startTime); // Store it if I want to restart the timer on the next page
-
-function startTimer() {
-  const now = Math.floor(Date.now() / 1000); // get the time now
-  const diff = now - startTime; // diff in seconds between now and start
-  let m = Math.floor(diff / 60); // get minutes value (quotient of diff)
-  let s = Math.floor(diff % 60); // get seconds value (remainder of diff)
-  m = checkTime(m); // add a leading zero if it's single digit
-  s = checkTime(s); // add a leading zero if it's single digit
-  console.log(m + ":" + s);
-  setTimeout(startTimer, 500); // set a timeout to update the timer
-}
-
-function checkTime(i) {
-  if (i < 10) {
-    i = "0" + i;
-  } // add zero in front of numbers < 10
-  return i;
-}
 
 function App() {
   const [moveCount, setMoveCount] = useState(0);
+  const [time, setTime] = useState("0:00");
+
+  const startTimer = () => {
+    const startTime = Math.floor(Date.now() / 1000); // Get the starting time (right now) in seconds
+    updateTime(startTime); // set a timeout to update the timer
+  };
+
+  const checkTime = (i) => {
+    if (i < 10) {
+      i = "0" + i;
+    } // add zero in front of numbers < 10
+    return i;
+  };
+
+  const updateTime = (startTime) => {
+    const now = Math.floor(Date.now() / 1000); // get the time now
+    const diff = now - startTime; // diff in seconds between now and start
+    const m = Math.floor(diff / 60); // get minutes value (quotient of diff)
+    let s = Math.floor(diff % 60); // get seconds value (remainder of diff)
+    s = checkTime(s); // add a leading zero if it's single digit
+    setTime(m + ":" + s); // update time for footer display
+    setTimeout(() => updateTime(startTime), 500); // set a timeout to update the timer
+  };
 
   return (
     <Container>
       <FontStyles />
       <Header />
-      <Gameboard test={startTimer} setMoveCount={setMoveCount} />
-      <Footer moveCount={moveCount} />
+      <Gameboard
+        time={time}
+        startTimer={startTimer}
+        setMoveCount={setMoveCount}
+      />
+      <Footer moveCount={moveCount} time={time} />
     </Container>
   );
 }

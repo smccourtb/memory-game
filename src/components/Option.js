@@ -6,7 +6,7 @@ const Option = ({ index, value, setPicked, picked, matches }) => {
   const [chosen, setChosen] = useState(false);
 
   const optionChosen = () => {
-    if (!chosen) {
+    if (picked.length < 2 && !chosen) {
       setChosen(true);
       setPicked((prev) => [...prev, { value, index }]);
     }
@@ -14,7 +14,10 @@ const Option = ({ index, value, setPicked, picked, matches }) => {
 
   useEffect(() => {
     if (picked.length === 2) {
-      setChosen(false);
+      const timer = setTimeout(() => {
+        setChosen(false);
+      }, 500);
+      return () => clearTimeout(timer);
     }
   }, [picked]);
 
