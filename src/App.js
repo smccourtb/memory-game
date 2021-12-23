@@ -43,7 +43,7 @@ function App() {
   return (
     <Container>
       <FontStyles />
-      {complete && <GameOver time={time} moveCount={moveCount} />}
+      {complete && <GameOver time={formatTime(time)} moveCount={moveCount} />}
       <Header />
       <Gameboard
         time={formatTime(time)}
