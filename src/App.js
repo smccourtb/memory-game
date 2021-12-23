@@ -20,6 +20,7 @@ function App() {
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
   const [complete, setComplete] = useState(false);
+  const [reset, setReset] = useState(false);
   const countRef = useRef(null);
 
   const handleStart = () => {
@@ -40,16 +41,31 @@ function App() {
     return `${getMinutes} : ${getSeconds}`;
   };
 
+  const restartGame = () => {
+    console.log("restart game called - 1");
+    setReset(true);
+    setTime(0);
+    setMoveCount(0);
+    setComplete(false);
+  };
+
   return (
     <Container>
       <FontStyles />
-      {complete && <GameOver time={formatTime(time)} moveCount={moveCount} />}
+      {complete && (
+        <GameOver
+          time={formatTime(time)}
+          moveCount={moveCount}
+          restartGame={restartGame}
+        />
+      )}
       <Header />
       <Gameboard
         time={formatTime(time)}
         startTimer={handleStart}
         setMoveCount={setMoveCount}
         stopTimer={handleStop}
+        reset={reset}
       />
       <Footer
         moveCount={moveCount}

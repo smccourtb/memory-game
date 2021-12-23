@@ -18,7 +18,7 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
     return boardArray;
   };
 
-  const [board] = useState(shuffleArray(createBoard(16 / 2)));
+  const [board, setBoard] = useState(shuffleArray(createBoard(16 / 2)));
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -34,13 +34,18 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
       if (picked[0].value === picked[1].value) {
         setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
       }
+
       setMoveCount((prevCount) => prevCount + 1);
-      if (matches.length === 14) {
-        console.log("YOU WIN");
-        stopTimer();
-      }
       return () => clearTimeout(timer);
     }
+    if (matches.length > 14) {
+      console.log("YOU WIN");
+      stopTimer();
+      setMatches([]);
+      setPicked([]);
+      setBoard((prevBoard) => shuffleArray([...prevBoard]));
+    }
+
     if (time === "0 : 00" && picked.length > 0) {
       startTimer();
     }
@@ -56,7 +61,6 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
       matches={matches}
     />
   ));
-
   return <BoardContainer>{choices}</BoardContainer>;
 };
 
@@ -65,6 +69,7 @@ GameBoard.propTypes = {
   setMoveCount: PropTypes.func,
   time: PropTypes.string,
   stopTimer: PropTypes.func,
+  reset: PropTypes.bool,
 };
 
 export default GameBoard;

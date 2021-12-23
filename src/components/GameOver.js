@@ -57,7 +57,7 @@ const Restart = styled.button`
   outline: none;
   border-radius: 26px;
   font-size: 18px;
-  font-family: Atkinson Hyperlegible;
+  font-family: Atkinson Hyperlegible, sans-serif;
   font-weight: 700;
 `;
 
@@ -70,29 +70,31 @@ const NewGame = styled.button`
   outline: none;
   border-radius: 26px;
   font-size: 18px;
-  font-family: Atkinson Hyperlegible;
+  font-family: Atkinson Hyperlegible, sans-serif;
   font-weight: 700;
 `;
-const GameOver = ({ time, moveCount }) => (
-  <Container>
-    <Header>You did it!</Header>
-    <Message>Game over! Here&apos;s how you got on...</Message>
-    <StatContainer>
-      <DataLabel>Time Elapsed</DataLabel>
-      <DataValue>{time}</DataValue>
-    </StatContainer>
-    <StatContainer>
-      <DataLabel>Moves Taken</DataLabel>
-      <DataValue>{`${moveCount} Moves`}</DataValue>
-    </StatContainer>
-    <Restart>Restart</Restart>
-    <NewGame>Setup New Game</NewGame>
-  </Container>
-);
-
+const GameOver = ({ time, moveCount, restartGame }) => {
+  return (
+    <Container>
+      <Header>You did it!</Header>
+      <Message>Game over! Here&apos;s how you got on...</Message>
+      <StatContainer>
+        <DataLabel>Time Elapsed</DataLabel>
+        <DataValue>{time}</DataValue>
+      </StatContainer>
+      <StatContainer>
+        <DataLabel>Moves Taken</DataLabel>
+        <DataValue>{`${moveCount} Moves`}</DataValue>
+      </StatContainer>
+      <Restart onClick={restartGame}>Restart</Restart>
+      <NewGame>Setup New Game</NewGame>
+    </Container>
+  );
+};
 export default GameOver;
 
 GameOver.propTypes = {
   moveCount: PropTypes.number,
   time: PropTypes.string,
+  restartGame: PropTypes.func,
 };
