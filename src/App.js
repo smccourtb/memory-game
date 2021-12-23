@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
+import GameOver from "./components/GameOver";
 import styled from "styled-components";
 import FontStyles from "./fontStyles";
 import { useRef, useState } from "react";
@@ -15,14 +16,10 @@ const Container = styled.div`
   width: 100%;
 `;
 
-// localStorage.setItem("startTime", startTime); // Store it if I want to restart the timer on the next page
-
 function App() {
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
   const [complete, setComplete] = useState(false);
-
-  // #####################################################################//
   const countRef = useRef(null);
 
   const handleStart = () => {
@@ -40,13 +37,13 @@ function App() {
     const getSeconds = `0${timeToFormat % 60}`.slice(-2);
     const minutes = `${Math.floor(timeToFormat / 60)}`;
     const getMinutes = `${minutes % 60}`.slice(-2);
-
     return `${getMinutes} : ${getSeconds}`;
   };
 
   return (
     <Container>
       <FontStyles />
+      {complete && <GameOver time={time} moveCount={moveCount} />}
       <Header />
       <Gameboard
         time={formatTime(time)}
