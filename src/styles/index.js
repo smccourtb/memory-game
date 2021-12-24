@@ -10,9 +10,7 @@ export const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding: 24px;
-    min-height: 100vh;
-    height: 100vh;
+    
   }
   
   code {

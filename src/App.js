@@ -2,11 +2,16 @@ import Header from "./components/Header";
 import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
 import GameOver from "./components/GameOver";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import FontStyles from "./fontStyles";
 import { useRef, useState } from "react";
 
 const Container = styled.div`
+  ${(props) =>
+    props["setup"] &&
+    css`
+      background-color: #152938;
+    `}
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,6 +57,7 @@ function App() {
   return (
     <Container>
       <FontStyles />
+
       {complete && (
         <GameOver
           time={formatTime(time)}
