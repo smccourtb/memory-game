@@ -2,16 +2,11 @@ import Header from "./components/Header";
 import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
 import GameOver from "./components/GameOver";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import FontStyles from "./fontStyles";
 import { useRef, useState } from "react";
 
 const Container = styled.div`
-  ${(props) =>
-    props["setup"] &&
-    css`
-      background-color: #152938;
-    `}
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,6 +17,11 @@ const Container = styled.div`
 `;
 
 function App() {
+  const [settings, setSettings] = useState({
+    icon: "numbers",
+    playerCount: 1,
+    boardSize: 16,
+  });
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
   const [complete, setComplete] = useState(false);
@@ -47,7 +47,6 @@ function App() {
   };
 
   const restartGame = () => {
-    console.log("restart game called - 1");
     setReset(true);
     setTime(0);
     setMoveCount(0);
