@@ -1,5 +1,7 @@
+import React from "react";
 import Logo from "../assets/logo.svg";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Menu = styled.div`
   width: 327px;
@@ -27,7 +29,7 @@ const Img = styled.svg`
   width: 150px;
 `;
 
-const Setup = () => {
+const Setup = ({ setSettings }) => {
   return (
     <Container>
       <Img />
@@ -39,10 +41,46 @@ const Setup = () => {
         </div>
         <h3>Number of Players</h3>
         <div>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
+          <button
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                playerCount: 1,
+              }));
+            }}
+          >
+            1
+          </button>
+          <button
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                playerCount: 2,
+              }));
+            }}
+          >
+            2
+          </button>
+          <button
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                playerCount: 3,
+              }));
+            }}
+          >
+            3
+          </button>
+          <button
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                playerCount: 4,
+              }));
+            }}
+          >
+            4
+          </button>
         </div>
         <h3>Grid Size</h3>
         <div>
@@ -56,3 +94,7 @@ const Setup = () => {
 };
 
 export default Setup;
+
+Setup.propTypes = {
+  setSettings: PropTypes.func,
+};

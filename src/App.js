@@ -17,11 +17,6 @@ const Container = styled.div`
 `;
 
 function App() {
-  const [settings, setSettings] = useState({
-    icon: "numbers",
-    playerCount: 1,
-    boardSize: 16,
-  });
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
   const [complete, setComplete] = useState(false);
