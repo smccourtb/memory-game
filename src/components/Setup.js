@@ -33,16 +33,22 @@ const Setup = () => {
       <Img />
       <Menu>
         <h3>Select Theme</h3>
-        <button>Numbers</button>
-        <button>Icons</button>
+        <div>
+          <button>Numbers</button>
+          <button>Icons</button>
+        </div>
         <h3>Number of Players</h3>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
+        <div>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
+        </div>
         <h3>Grid Size</h3>
-        <button>4x4</button>
-        <button>6x6</button>
+        <div>
+          <button>4x4</button>
+          <button>6x6</button>
+        </div>
         <button>Start Game</button>
       </Menu>
     </Container>
