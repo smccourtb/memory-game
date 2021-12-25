@@ -84,8 +84,26 @@ const Setup = ({ setSettings }) => {
         </div>
         <h3>Grid Size</h3>
         <div>
-          <button>4x4</button>
-          <button>6x6</button>
+          <button
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                boardSize: 16,
+              }));
+            }}
+          >
+            4x4
+          </button>
+          <button
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                boardSize: 36,
+              }));
+            }}
+          >
+            6x6
+          </button>
         </div>
         <button>Start Game</button>
       </Menu>
