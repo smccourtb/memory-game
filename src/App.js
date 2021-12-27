@@ -62,7 +62,7 @@ function App({ settings, setSetup }) {
           setSetup={setSetup}
         />
       )}
-      <Header />
+      <Header restartGame={restartGame} setSetup={setSetup} />
       <Gameboard
         time={formatTime(time)}
         startTimer={handleStart}
