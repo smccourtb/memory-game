@@ -73,7 +73,7 @@ const NewGame = styled.button`
   font-family: Atkinson Hyperlegible, sans-serif;
   font-weight: 700;
 `;
-const GameOver = ({ time, moveCount, restartGame }) => {
+const GameOver = ({ time, moveCount, restartGame, setSetup }) => {
   return (
     <Container>
       <Header>You did it!</Header>
@@ -87,7 +87,7 @@ const GameOver = ({ time, moveCount, restartGame }) => {
         <DataValue>{`${moveCount} Moves`}</DataValue>
       </StatContainer>
       <Restart onClick={restartGame}>Restart</Restart>
-      <NewGame>Setup New Game</NewGame>
+      <NewGame onClick={() => setSetup(true)}>Setup New Game</NewGame>
     </Container>
   );
 };
@@ -97,4 +97,5 @@ GameOver.propTypes = {
   moveCount: PropTypes.number,
   time: PropTypes.string,
   restartGame: PropTypes.func,
+  setSetup: PropTypes.func,
 };

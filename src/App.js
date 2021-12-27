@@ -17,7 +17,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-function App({ settings }) {
+function App({ settings, setSetup }) {
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
   const [complete, setComplete] = useState(false);
@@ -59,6 +59,7 @@ function App({ settings }) {
           moveCount={moveCount}
           restartGame={restartGame}
           settings={settings}
+          setSetup={setSetup}
         />
       )}
       <Header />
@@ -84,4 +85,5 @@ export default App;
 
 App.propTypes = {
   settings: PropTypes.object,
+  setSetup: PropTypes.func,
 };

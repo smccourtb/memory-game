@@ -35,7 +35,7 @@ const Root = () => {
           settings={settings}
         />
       ) : (
-        <App settings={settings} />
+        <App settings={settings} setSetup={setSetup} />
       )}
     </Container>
   );
