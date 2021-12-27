@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Header from "./components/Header";
 import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
@@ -16,7 +17,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-function App() {
+function App({ settings }) {
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
   const [complete, setComplete] = useState(false);
@@ -57,6 +58,7 @@ function App() {
           time={formatTime(time)}
           moveCount={moveCount}
           restartGame={restartGame}
+          settings={settings}
         />
       )}
       <Header />
@@ -66,14 +68,20 @@ function App() {
         setMoveCount={setMoveCount}
         stopTimer={handleStop}
         reset={reset}
+        settings={settings}
       />
       <Footer
         moveCount={moveCount}
         time={formatTime(time)}
         complete={complete}
+        settings={settings}
       />
     </Container>
   );
 }
 
 export default App;
+
+App.propTypes = {
+  settings: PropTypes.object,
+};
