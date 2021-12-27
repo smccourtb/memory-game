@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../assets/logo.svg";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
 const Menu = styled.div`
@@ -12,6 +12,7 @@ const Menu = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 24px;
 `;
 
 const Container = styled.div`
@@ -29,19 +30,95 @@ const Img = styled.svg`
   width: 150px;
 `;
 
-const Setup = ({ setSettings }) => {
+const Labels = styled.h3`
+  font-size: 15px;
+  color: #7191a5;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 700;
+  align-self: flex-start;
+`;
+
+const OptionButtons = styled.button`
+  ${(props) =>
+    props.selected
+      ? css`
+           {
+            background-color: #304859;
+          }
+        `
+      : css`
+           {
+            background-color: #bcced9;
+          }
+        `};
+  height: 40px;
+  width: 50%;
+  padding: 5px;
+  background-color: #bcced9;
+  outline: none;
+  border: none;
+  border-radius: 24px;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  padding-top: 11px;
+  padding-bottom: 24px;
+  gap: 11px;
+`;
+
+const NewGame = styled.button`
+  color: white;
+  width: 279px;
+  height: 48px;
+  background-color: #fda214;
+  border: none;
+  outline: none;
+  border-radius: 26px;
+  font-size: 18px;
+  font-family: Atkinson Hyperlegible, sans-serif;
+  font-weight: 700;
+`;
+const Setup = ({ setSettings, setSetup, settings }) => {
   return (
     <Container>
       <Img />
       <Menu>
-        <h3>Select Theme</h3>
-        <div>
-          <button>Numbers</button>
-          <button>Icons</button>
-        </div>
-        <h3>Number of Players</h3>
-        <div>
-          <button
+        <Labels>Select Theme</Labels>
+        <ButtonContainer>
+          <OptionButtons
+            selected={settings.icon === "numbers"}
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                icon: "numbers",
+              }));
+            }}
+          >
+            Numbers
+          </OptionButtons>
+          <OptionButtons
+            selected={settings.icon === "icons"}
+            onClick={() => {
+              setSettings((prevSettings) => ({
+                ...prevSettings,
+                icon: "icons",
+              }));
+            }}
+          >
+            Icons
+          </OptionButtons>
+        </ButtonContainer>
+        <Labels>Number of Players</Labels>
+        <ButtonContainer>
+          <OptionButtons
+            selected={settings.playerCount === 1}
             onClick={() => {
               setSettings((prevSettings) => ({
                 ...prevSettings,
@@ -50,8 +127,9 @@ const Setup = ({ setSettings }) => {
             }}
           >
             1
-          </button>
-          <button
+          </OptionButtons>
+          <OptionButtons
+            selected={settings.playerCount === 2}
             onClick={() => {
               setSettings((prevSettings) => ({
                 ...prevSettings,
@@ -60,8 +138,9 @@ const Setup = ({ setSettings }) => {
             }}
           >
             2
-          </button>
-          <button
+          </OptionButtons>
+          <OptionButtons
+            selected={settings.playerCount === 3}
             onClick={() => {
               setSettings((prevSettings) => ({
                 ...prevSettings,
@@ -70,8 +149,9 @@ const Setup = ({ setSettings }) => {
             }}
           >
             3
-          </button>
-          <button
+          </OptionButtons>
+          <OptionButtons
+            selected={settings.playerCount === 4}
             onClick={() => {
               setSettings((prevSettings) => ({
                 ...prevSettings,
@@ -80,11 +160,12 @@ const Setup = ({ setSettings }) => {
             }}
           >
             4
-          </button>
-        </div>
-        <h3>Grid Size</h3>
-        <div>
-          <button
+          </OptionButtons>
+        </ButtonContainer>
+        <Labels>Grid Size</Labels>
+        <ButtonContainer>
+          <OptionButtons
+            selected={settings.boardSize === 16}
             onClick={() => {
               setSettings((prevSettings) => ({
                 ...prevSettings,
@@ -93,8 +174,9 @@ const Setup = ({ setSettings }) => {
             }}
           >
             4x4
-          </button>
-          <button
+          </OptionButtons>
+          <OptionButtons
+            selected={settings.boardSize === 36}
             onClick={() => {
               setSettings((prevSettings) => ({
                 ...prevSettings,
@@ -103,9 +185,9 @@ const Setup = ({ setSettings }) => {
             }}
           >
             6x6
-          </button>
-        </div>
-        <button>Start Game</button>
+          </OptionButtons>
+        </ButtonContainer>
+        <NewGame onClick={() => setSetup(false)}>Start Game</NewGame>
       </Menu>
     </Container>
   );
@@ -115,4 +197,6 @@ export default Setup;
 
 Setup.propTypes = {
   setSettings: PropTypes.func,
+  setSetup: PropTypes.func,
+  settings: PropTypes.object,
 };

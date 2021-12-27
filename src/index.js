@@ -17,18 +17,23 @@ const Container = styled.div`
     `}
 `;
 const Root = () => {
+  const [setup, setSetup] = useState(true);
   const [settings, setSettings] = useState({
     icon: "numbers",
     playerCount: 1,
     boardSize: 16,
   });
   console.log(settings);
-  const [setup] = useState(true);
+
   return (
     <Container setup={setup}>
       <GlobalStyle />
       {setup ? (
-        <Setup settings={settings} setSettings={setSettings} />
+        <Setup
+          setSetup={setSetup}
+          setSettings={setSettings}
+          settings={settings}
+        />
       ) : (
         <App settings={settings} />
       )}
