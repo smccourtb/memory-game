@@ -2,12 +2,52 @@ import { BoardContainer } from "../styles/Gameboard";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Option from "./Option";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGhost,
+  faGem,
+  faFlask,
+  faCubes,
+  faSun,
+  faSkullCrossbones,
+  faScroll,
+  faRing,
+  faHatWizard,
+  faFire,
+  faDungeon,
+  faDragon,
+  faDiceD6,
+  faDiceD20,
+  faBookDead,
+  faQuidditch,
+  faSkull,
+  faRocket,
+} from "@fortawesome/free-solid-svg-icons";
 
 // TODO: change test prop name
 const GameBoard = ({ startTimer, setMoveCount, time, stopTimer, settings }) => {
   const [picked, setPicked] = useState([]);
   const [matches, setMatches] = useState([]);
-
+  const icons = {
+    0: faGhost,
+    1: faGem,
+    2: faFlask,
+    3: faCubes,
+    4: faSun,
+    5: faSkullCrossbones,
+    6: faScroll,
+    7: faRing,
+    8: faHatWizard,
+    9: faFire,
+    10: faDungeon,
+    11: faDragon,
+    12: faDiceD6,
+    13: faDiceD20,
+    14: faBookDead,
+    15: faQuidditch,
+    16: faSkull,
+    17: faRocket,
+  };
   // create an array with the length of 16.
   // create 8 pairs of numbers (array.length/2)
   const createBoard = (boardSize) => {
@@ -61,7 +101,14 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer, settings }) => {
       setPicked={setPicked}
       picked={picked}
       matches={matches}
-    />
+    >
+      {settings.icon === "icons" && (
+        <FontAwesomeIcon
+          icon={icons[optionValue]}
+          style={{ width: "20px", height: "20px" }}
+        />
+      )}
+    </Option>
   ));
   return (
     <BoardContainer boardSize={settings.boardSize}>{choices}</BoardContainer>
