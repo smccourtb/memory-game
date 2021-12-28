@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "../assets/logo.svg";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
@@ -33,7 +32,6 @@ const Img = styled.svg`
 const Labels = styled.h3`
   font-size: 15px;
   color: #7191a5;
-  font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: 700;
   align-self: flex-start;
 `;
@@ -58,7 +56,6 @@ const OptionButtons = styled.button`
   outline: none;
   border: none;
   border-radius: 24px;
-  font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: 700;
   color: white;
   font-size: 16px;
@@ -82,7 +79,6 @@ const NewGame = styled.button`
   outline: none;
   border-radius: 26px;
   font-size: 18px;
-  font-family: Atkinson Hyperlegible, sans-serif;
   font-weight: 700;
 `;
 const Setup = ({ setSettings, setSetup, settings }) => {

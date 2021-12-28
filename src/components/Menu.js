@@ -13,6 +13,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+  z-index: 1;
 `;
 
 const Buttons = styled.button`
@@ -20,7 +21,6 @@ const Buttons = styled.button`
   height: 48px;
   background-color: #dfe7ec;
   color: #304859;
-  font-family: Atkinson Hyperlegible, sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
