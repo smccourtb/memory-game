@@ -55,7 +55,6 @@ const Restart = styled.button`
   outline: none;
   border-radius: 26px;
   font-size: 18px;
-  font-family: Atkinson Hyperlegible, sans-serif;
   font-weight: 700;
 `;
 const NewGame = styled.button`
@@ -67,7 +66,6 @@ const NewGame = styled.button`
   outline: none;
   border-radius: 26px;
   font-size: 18px;
-  font-family: Atkinson Hyperlegible, sans-serif;
   font-weight: 700;
 `;
 const GameOver = ({
@@ -96,8 +94,11 @@ const GameOver = ({
 
   const Players = () => {
     const playerData = sortPlayerRank();
-    return playerData.map((player) => (
-      <StatContainer winner={player.score === determineHighestScore()}>
+    return playerData.map((player, idx) => (
+      <StatContainer
+        key={idx}
+        winner={player.score === determineHighestScore()}
+      >
         <DataLabel winner={player.score === determineHighestScore()}>
           Player {player.number}
         </DataLabel>

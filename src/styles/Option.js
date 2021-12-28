@@ -13,7 +13,10 @@ export const Container = styled.button`
             background-color: #304859;
           }
         `};
-  ${(props) => props.matches && css`{background-color: #BCCED9`};
+  ${(props) =>
+    props.matches &&
+    css`{
+            background-color: #BCCED9`};
   border-radius: 50%;
   height: 100%;
   width: 100%;
@@ -27,6 +30,5 @@ export const Container = styled.button`
 export const Value = styled.div`
   color: white;
   font-size: 40px;
-  font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: 700;
 `;

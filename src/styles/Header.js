@@ -14,7 +14,6 @@ export const Img = styled.img`
 `;
 
 export const MenuButton = styled.button`
-  font-family: "Atkinson Hyperlegible";
   background-color: #fda214;
   color: #fcfcfc;
   border: none;

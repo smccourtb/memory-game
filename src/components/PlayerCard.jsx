@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -24,8 +23,6 @@ const Score = styled.p`
   font-size: 24px;
 `;
 const PlayerCard = ({ number, score, playerTurn }) => {
-  // const [score, setScore] = useState(0);
-  // const [active, setActive] = useState(false);
   return (
     <Container active={number === playerTurn}>
       <h3>{`P${number}`}</h3>

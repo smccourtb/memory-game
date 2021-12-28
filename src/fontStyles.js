@@ -6,13 +6,13 @@ import AtkinsonBoldWoff2 from "./assets/fonts/atkinson-hyperlegible-bold.woff2";
 
 const FontStyles = createGlobalStyle`
 
-@font-face {
-  font-family: 'Roboto Condensed';
-  src: url(${AtkinsonWoff}) format('woff'),
-       url(${AtkinsonWoff2}) format('woff2'),
-       url(${AtkinsonBoldWoff}) format('woff'),
-       url(${AtkinsonBoldWoff2}) format('woff2');
-}
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: url(${AtkinsonWoff}) format('woff'),
+    url(${AtkinsonWoff2}) format('woff2'),
+    url(${AtkinsonBoldWoff}) format('woff'),
+    url(${AtkinsonBoldWoff2}) format('woff2');
+  }
 `;
 
 export default FontStyles;
