@@ -14,7 +14,7 @@ const Container = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 19px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: center;
   justify-content: space-evenly;
 `;
