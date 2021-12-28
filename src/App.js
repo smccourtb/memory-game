@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Header from "./components/Header";
 import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
@@ -16,12 +17,14 @@ const Container = styled.div`
   width: 100%;
 `;
 
-function App() {
+function App({ settings, setSetup }) {
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
   const [complete, setComplete] = useState(false);
   const [reset, setReset] = useState(false);
   const countRef = useRef(null);
+  const [playerTurn, setPlayerTurn] = useState(1);
+  const [scores, setScores] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
 
   const handleStart = () => {
     countRef.current = setInterval(() => {
@@ -42,7 +45,6 @@ function App() {
   };
 
   const restartGame = () => {
-    console.log("restart game called - 1");
     setReset(true);
     setTime(0);
     setMoveCount(0);
@@ -52,28 +54,46 @@ function App() {
   return (
     <Container>
       <FontStyles />
+
       {complete && (
         <GameOver
           time={formatTime(time)}
           moveCount={moveCount}
           restartGame={restartGame}
+          settings={settings}
+          setSetup={setSetup}
+          scores={scores}
+          settings={settings}
         />
       )}
-      <Header />
+      <Header restartGame={restartGame} setSetup={setSetup} />
       <Gameboard
         time={formatTime(time)}
         startTimer={handleStart}
         setMoveCount={setMoveCount}
         stopTimer={handleStop}
         reset={reset}
+        settings={settings}
+        setPlayerTurn={setPlayerTurn}
+        playerTurn={playerTurn}
+        setScores={setScores}
+        scores={scores}
       />
       <Footer
         moveCount={moveCount}
         time={formatTime(time)}
         complete={complete}
+        settings={settings}
+        playerTurn={playerTurn}
+        scores={scores}
       />
     </Container>
   );
 }
 
 export default App;
+
+App.propTypes = {
+  settings: PropTypes.object,
+  setSetup: PropTypes.func,
+};

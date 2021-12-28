@@ -3,8 +3,17 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Option from "./Option";
 
-// TODO: change test prop name
-const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
+const GameBoard = ({
+  startTimer,
+  setMoveCount,
+  time,
+  stopTimer,
+  settings,
+  playerTurn,
+  setPlayerTurn,
+  setScores,
+  scores,
+}) => {
   const [picked, setPicked] = useState([]);
   const [matches, setMatches] = useState([]);
 
@@ -17,8 +26,9 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
     }
     return boardArray;
   };
-
-  const [board, setBoard] = useState(shuffleArray(createBoard(16 / 2)));
+  const [board, setBoard] = useState(
+    shuffleArray(createBoard(settings.boardSize / 2))
+  );
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -33,6 +43,20 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
       const timer = setTimeout(() => setPicked([]), 500);
       if (picked[0].value === picked[1].value) {
         setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
+        scores[playerTurn]++;
+        setScores((prevScores) => ({
+          ...prevScores,
+        }));
+      } else {
+        if (settings.playerCount > 1) {
+          setPlayerTurn(() => {
+            if (playerTurn < settings.playerCount) {
+              console.log("SHOULD INCREMENT");
+              return playerTurn + 1;
+            }
+            return 1;
+          });
+        }
       }
 
       setMoveCount((prevCount) => prevCount + 1);
@@ -48,9 +72,9 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
 
     if (time === "0 : 00" && picked.length > 0) {
       startTimer();
+      // set player1 active
     }
   }, [picked]);
-
   const choices = board.map((optionValue, index) => (
     <Option
       key={index}
@@ -59,9 +83,12 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer }) => {
       setPicked={setPicked}
       picked={picked}
       matches={matches}
+      settings={settings}
     />
   ));
-  return <BoardContainer>{choices}</BoardContainer>;
+  return (
+    <BoardContainer boardSize={settings.boardSize}>{choices}</BoardContainer>
+  );
 };
 
 GameBoard.propTypes = {
@@ -70,6 +97,11 @@ GameBoard.propTypes = {
   time: PropTypes.string,
   stopTimer: PropTypes.func,
   reset: PropTypes.bool,
+  settings: PropTypes.object,
+  playerTurn: PropTypes.number,
+  setPlayerTurn: PropTypes.func,
+  setScores: PropTypes.func,
+  scores: PropTypes.object,
 };
 
 export default GameBoard;
