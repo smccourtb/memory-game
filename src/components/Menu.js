@@ -30,7 +30,6 @@ const Buttons = styled.button`
   border-radius: 24px;
   border: none;
   outline: none;
-  h
 `;
 const Menu = ({ setSetup, setShowMenu, restartGame }) => {
   return (
