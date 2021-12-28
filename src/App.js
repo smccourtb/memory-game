@@ -63,7 +63,6 @@ function App({ settings, setSetup }) {
           settings={settings}
           setSetup={setSetup}
           scores={scores}
-          settings={settings}
         />
       )}
       <Header restartGame={restartGame} setSetup={setSetup} />

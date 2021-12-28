@@ -32,19 +32,19 @@ const StatContainer = styled.div`
   width: 270px;
   height: 48px;
   border-radius: 5px;
-  background-color: ${(props) => (props.winner ? "#152938" : "#dfe7ec")};
+  background-color: ${({ winner }) => (winner ? "#152938" : "#dfe7ec")};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px;
 `;
 const DataLabel = styled.p`
-  color: ${(props) => (props.winner ? "white" : "#7191a5")};
+  color: ${({ winner }) => (winner ? "white" : "#7191a5")};
   font-size: 13px;
 `;
 const DataValue = styled.p`
   font-size: 20px;
-  color: ${(props) => (props.winner ? "white" : "#black")};
+  color: ${({ winner }) => (winner ? "white" : "#black")};
 `;
 const Restart = styled.button`
   color: white;
@@ -84,7 +84,7 @@ const GameOver = ({
     return Math.max(...highest);
   };
 
-  const playerContainers = () => {
+  const sortPlayerRank = () => {
     let playerScores = Object.values(scores);
     let players = [];
     for (let i = 0; i < playerScores.length; i++) {
@@ -95,7 +95,7 @@ const GameOver = ({
   };
 
   const Players = () => {
-    const playerData = playerContainers();
+    const playerData = sortPlayerRank();
     return playerData.map((player) => (
       <StatContainer winner={player.score === determineHighestScore()}>
         <DataLabel winner={player.score === determineHighestScore()}>
@@ -111,7 +111,7 @@ const GameOver = ({
     <Container>
       <Header>
         {settings.playerCount > 1
-          ? `Player ${playerContainers()[0].number} Wins!`
+          ? `Player ${sortPlayerRank()[0].number} Wins!`
           : `You did it!`}
       </Header>
       <Message>
