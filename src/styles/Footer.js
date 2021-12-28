@@ -20,7 +20,7 @@ export const DataContainer = styled.div`
 `;
 
 export const Title = styled.p`
-  font-family: Atkinson Hyperlegible;
+  font-family: Atkinson Hyperlegible, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
@@ -30,7 +30,7 @@ export const Title = styled.p`
 `;
 
 export const Value = styled.p`
-  font-family: Atkinson Hyperlegible;
+  font-family: Atkinson Hyperlegible, sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;

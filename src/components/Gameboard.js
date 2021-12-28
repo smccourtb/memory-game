@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Option from "./Option";
 
-// TODO: change test prop name
 const GameBoard = ({ startTimer, setMoveCount, time, stopTimer, settings }) => {
   const [picked, setPicked] = useState([]);
   const [matches, setMatches] = useState([]);
@@ -17,7 +16,6 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer, settings }) => {
     }
     return boardArray;
   };
-  console.log("YOOOO ITS : ", settings.icon);
   const [board, setBoard] = useState(
     shuffleArray(createBoard(settings.boardSize / 2))
   );
@@ -50,6 +48,7 @@ const GameBoard = ({ startTimer, setMoveCount, time, stopTimer, settings }) => {
 
     if (time === "0 : 00" && picked.length > 0) {
       startTimer();
+      // set player1 active
     }
   }, [picked]);
 
