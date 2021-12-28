@@ -97,7 +97,6 @@ function App() {
           <Footer
             moveCount={moveCount}
             time={formatTime(time)}
-            complete={complete}
             settings={settings}
             playerTurn={playerTurn}
             scores={scores}

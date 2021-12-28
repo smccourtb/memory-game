@@ -1,4 +1,4 @@
-import { BoardContainer } from "../styles/Gameboard";
+import { BoardContainer } from "../styles/gameboard-styles";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Option from "./Option";
