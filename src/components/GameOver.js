@@ -5,7 +5,7 @@ const Container = styled.div`
   position: absolute;
   width: 327px;
   //height: 376px;
-  background-color: darkgrey;
+  background-color: white;
   top: 90px;
   left: 24px;
   gap: 8px;
@@ -16,6 +16,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding: 24px;
+  z-index: 1;
+  border-radius: 10px;
 `;
 
 const Header = styled.h2`

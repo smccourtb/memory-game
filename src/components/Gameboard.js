@@ -12,7 +12,6 @@ const GameBoard = ({
   playerTurn,
   setPlayerTurn,
   setScores,
-  scores,
 }) => {
   // keeps track of the values that have been selected
   const [picked, setPicked] = useState([]);
@@ -44,17 +43,20 @@ const GameBoard = ({
     if (picked.length >= 2) {
       // resets picked state to empty array after .5 seconds
       const timer = setTimeout(() => setPicked([]), 500);
+
+      // if user finds a matching pair
       if (picked[0].value === picked[1].value) {
+        // add to the matches array
         setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
-        scores[playerTurn]++;
-        setScores((prevScores) => ({
-          ...prevScores,
-        }));
+        setScores((prevScores) => {
+          const prev = { ...prevScores };
+          prev[playerTurn]++;
+          return prev;
+        });
       } else {
         if (settings.playerCount > 1) {
           setPlayerTurn(() => {
             if (playerTurn < settings.playerCount) {
-              console.log("SHOULD INCREMENT");
               return playerTurn + 1;
             }
             return 1;
@@ -73,9 +75,8 @@ const GameBoard = ({
       setBoard((prevBoard) => shuffleArray([...prevBoard]));
     }
 
-    if (time === "0 : 00" && picked.length > 0) {
+    if (!time && picked.length > 0) {
       startTimer();
-      // set player1 active
     }
   }, [picked]);
 
@@ -95,18 +96,15 @@ const GameBoard = ({
     <BoardContainer boardSize={settings.boardSize}>{choices}</BoardContainer>
   );
 };
-
 GameBoard.propTypes = {
   startTimer: PropTypes.func,
   setMoveCount: PropTypes.func,
-  time: PropTypes.string,
+  time: PropTypes.number,
   stopTimer: PropTypes.func,
-  reset: PropTypes.bool,
   settings: PropTypes.object,
   playerTurn: PropTypes.number,
   setPlayerTurn: PropTypes.func,
   setScores: PropTypes.func,
-  scores: PropTypes.object,
 };
 
 export default GameBoard;

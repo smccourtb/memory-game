@@ -1,12 +1,13 @@
-import PropTypes from "prop-types";
 import Header from "./components/Header";
 import Gameboard from "./components/Gameboard";
 import Footer from "./components/Footer";
 import GameOver from "./components/GameOver";
+import Menu from "./components/Menu";
+import Setup from "./components/Setup";
+
 import styled from "styled-components";
 import FontStyles from "./fontStyles";
 import { useRef, useState } from "react";
-import Setup from "./components/Setup";
 
 const Container = styled.div`
   display: flex;
@@ -17,18 +18,26 @@ const Container = styled.div`
   height: 100vh;
   padding: 24px;
   width: 100%;
-  background-color: ${({ setup }) => setup && `#152938`};
+  background-color: ${({ setup }) => (setup ? `#152938` : `white`)};
+  filter: ${(props) => (props.showMenu || props.complete) && `brightness(15%)`};
+  z-index: -5;
 `;
 
 function App() {
+  // solo only props
   const [moveCount, setMoveCount] = useState(0);
   const [time, setTime] = useState(0);
-  const [complete, setComplete] = useState(false);
-  const [reset, setReset] = useState(false);
   const countRef = useRef(null);
+  // multiplayer only props
   const [playerTurn, setPlayerTurn] = useState(1);
   const [scores, setScores] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
+
+  // indicates the game is over and to show the game over menu
+  const [complete, setComplete] = useState(false);
+
   const [setup, setSetup] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
+
   const [settings, setSettings] = useState({
     icon: "numbers",
     playerCount: 1,
@@ -54,62 +63,63 @@ function App() {
   };
 
   const restartGame = () => {
-    setReset(true);
+    handleStop();
     setTime(0);
     setMoveCount(0);
     setComplete(false);
   };
 
   return (
-    <Container setup={setup}>
+    <>
       <FontStyles />
-      {setup ? (
-        <Setup
-          setSetup={setSetup}
-          setSettings={setSettings}
+      {complete && (
+        <GameOver
+          time={formatTime(time)}
+          moveCount={moveCount}
+          restartGame={restartGame}
           settings={settings}
+          setSetup={setSetup}
         />
-      ) : (
-        <>
-          {complete && (
-            <GameOver
-              time={formatTime(time)}
-              moveCount={moveCount}
-              restartGame={restartGame}
+      )}
+      {showMenu && (
+        <Menu
+          setSetup={setSetup}
+          restartGame={restartGame}
+          setShowMenu={setShowMenu}
+        />
+      )}
+      <Container setup={setup} complete={complete} showMenu={showMenu}>
+        {setup ? (
+          <Setup
+            setSetup={setSetup}
+            setSettings={setSettings}
+            settings={settings}
+          />
+        ) : (
+          <>
+            <Header setShowMenu={setShowMenu} />
+            <Gameboard
+              time={time}
+              startTimer={handleStart}
+              setMoveCount={setMoveCount}
+              stopTimer={handleStop}
               settings={settings}
-              setSetup={setSetup}
+              setPlayerTurn={setPlayerTurn}
+              playerTurn={playerTurn}
+              setScores={setScores}
+            />
+            <Footer
+              moveCount={moveCount}
+              time={formatTime(time)}
+              settings={settings}
+              playerTurn={playerTurn}
               scores={scores}
             />
-          )}
-          <Header restartGame={restartGame} setSetup={setSetup} />
-          <Gameboard
-            time={formatTime(time)}
-            startTimer={handleStart}
-            setMoveCount={setMoveCount}
-            stopTimer={handleStop}
-            reset={reset}
-            settings={settings}
-            setPlayerTurn={setPlayerTurn}
-            playerTurn={playerTurn}
-            setScores={setScores}
-            scores={scores}
-          />
-          <Footer
-            moveCount={moveCount}
-            time={formatTime(time)}
-            settings={settings}
-            playerTurn={playerTurn}
-            scores={scores}
-          />
-        </>
-      )}
-    </Container>
+          </>
+        )}
+      </Container>
+    </>
   );
 }
 
 export default App;
-
-App.propTypes = {
-  settings: PropTypes.object,
-  setSetup: PropTypes.func,
-};
