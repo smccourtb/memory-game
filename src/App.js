@@ -23,6 +23,8 @@ function App({ settings, setSetup }) {
   const [complete, setComplete] = useState(false);
   const [reset, setReset] = useState(false);
   const countRef = useRef(null);
+  const [playerTurn, setPlayerTurn] = useState(1);
+  const [scores, setScores] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
 
   const handleStart = () => {
     countRef.current = setInterval(() => {
@@ -60,6 +62,8 @@ function App({ settings, setSetup }) {
           restartGame={restartGame}
           settings={settings}
           setSetup={setSetup}
+          scores={scores}
+          settings={settings}
         />
       )}
       <Header restartGame={restartGame} setSetup={setSetup} />
@@ -70,12 +74,18 @@ function App({ settings, setSetup }) {
         stopTimer={handleStop}
         reset={reset}
         settings={settings}
+        setPlayerTurn={setPlayerTurn}
+        playerTurn={playerTurn}
+        setScores={setScores}
+        scores={scores}
       />
       <Footer
         moveCount={moveCount}
         time={formatTime(time)}
         complete={complete}
         settings={settings}
+        playerTurn={playerTurn}
+        scores={scores}
       />
     </Container>
   );

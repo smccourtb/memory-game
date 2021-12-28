@@ -23,14 +23,13 @@ const Container = styled.div`
 const Score = styled.p`
   font-size: 24px;
 `;
-const PlayerCard = ({ number }) => {
-  const [score, setScore] = useState(0);
-  const [active, setActive] = useState(false);
-
+const PlayerCard = ({ number, score, playerTurn }) => {
+  // const [score, setScore] = useState(0);
+  // const [active, setActive] = useState(false);
   return (
-    <Container active={active}>
+    <Container active={number === playerTurn}>
       <h3>{`P${number}`}</h3>
-      <Score>{score}</Score>
+      <Score>{score[number]}</Score>
     </Container>
   );
 };
@@ -39,4 +38,6 @@ export default PlayerCard;
 
 PlayerCard.propTypes = {
   number: PropTypes.number,
+  score: PropTypes.number,
+  playerTurn: PropTypes.bool,
 };
