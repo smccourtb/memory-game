@@ -4,18 +4,15 @@ import App from "./App";
 import Setup from "./components/Setup";
 import "./styles/index";
 import { GlobalStyle } from "./styles";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
   height: 100vh;
   width: 100%;
   padding: 24px;
-  ${(props) =>
-    props["setup"] &&
-    css`
-      background-color: #152938;
-    `}
+  background-color: ${({ setup }) => setup && `#152938`};
 `;
+
 const Root = () => {
   const [setup, setSetup] = useState(true);
   const [settings, setSettings] = useState({
@@ -23,7 +20,6 @@ const Root = () => {
     playerCount: 1,
     boardSize: 16,
   });
-  console.log(settings);
 
   return (
     <Container setup={setup}>

@@ -7,14 +7,15 @@ const Footer = ({ moveCount, time, settings, playerTurn, scores }) => {
     const cards = [];
     for (let i = 1; i < settings.playerCount + 1; i++) {
       cards.push(
-        <PlayerCard number={i} playerTurn={playerTurn} score={scores} />
+        <PlayerCard key={i} number={i} playerTurn={playerTurn} score={scores} />
       );
     }
     return cards;
   };
+
   return (
     <Container>
-      {settings.playerCount < 1 ? (
+      {settings.playerCount < 2 ? (
         <>
           <DataContainer role="time-container">
             <Title>Time</Title>

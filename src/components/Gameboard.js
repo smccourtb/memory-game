@@ -14,11 +14,12 @@ const GameBoard = ({
   setScores,
   scores,
 }) => {
+  // keeps track of the values that have been selected
   const [picked, setPicked] = useState([]);
+  // keeps track of correctly selected pairs
   const [matches, setMatches] = useState([]);
 
-  // create an array with the length of 16.
-  // create 8 pairs of numbers (array.length/2)
+  // create an array with the pairs of numbers based on a given size
   const createBoard = (boardSize) => {
     const boardArray = [];
     for (let i = 0; i < boardSize; i++) {
@@ -26,6 +27,7 @@ const GameBoard = ({
     }
     return boardArray;
   };
+
   const [board, setBoard] = useState(
     shuffleArray(createBoard(settings.boardSize / 2))
   );
@@ -40,6 +42,7 @@ const GameBoard = ({
 
   useEffect(() => {
     if (picked.length >= 2) {
+      // resets picked state to empty array after .5 seconds
       const timer = setTimeout(() => setPicked([]), 500);
       if (picked[0].value === picked[1].value) {
         setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
@@ -75,6 +78,7 @@ const GameBoard = ({
       // set player1 active
     }
   }, [picked]);
+
   const choices = board.map((optionValue, index) => (
     <Option
       key={index}
@@ -86,6 +90,7 @@ const GameBoard = ({
       settings={settings}
     />
   ));
+
   return (
     <BoardContainer boardSize={settings.boardSize}>{choices}</BoardContainer>
   );

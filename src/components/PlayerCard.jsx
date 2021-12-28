@@ -38,6 +38,6 @@ export default PlayerCard;
 
 PlayerCard.propTypes = {
   number: PropTypes.number,
-  score: PropTypes.number,
-  playerTurn: PropTypes.bool,
+  score: PropTypes.object,
+  playerTurn: PropTypes.number,
 };
