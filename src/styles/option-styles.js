@@ -30,4 +30,7 @@ export const Value = styled.div`
   color: white;
   font-size: ${({ smallText }) => (smallText ? "24px" : "40px")};
   font-weight: 700;
+  @media (min-width: 768px) {
+    font-size: ${({ smallText }) => (smallText ? "44px" : "56px")};
+  }
 `;

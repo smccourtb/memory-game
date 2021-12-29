@@ -6,10 +6,16 @@ export const Container = styled.header`
   align-items: center;
   width: 100%;
   height: 40px;
+  @media (min-width: 768px) {
+    height: 50px;
+  }
 `;
 
 export const Img = styled.img`
   width: 92px;
+  @media (min-width: 768px) {
+    width: 154px;
+  }
 `;
 
 export const MenuButton = styled.button`

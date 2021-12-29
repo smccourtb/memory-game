@@ -11,5 +11,10 @@ export const BoardContainer = styled.main`
   grid-row-gap: 0.5em;
   grid-column-gap: 0.5em;
   width: 100%;
+  max-width: 30em;
+  max-height: 30em;
   height: 90vw;
+  @media (min-width: 768px) {
+    gap: 1.1em;
+  }
 `;
