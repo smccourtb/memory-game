@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.footer`
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 23px;
   height: 70px;
   width: 100%;
   @media (min-width: 768px) {
