@@ -8,8 +8,8 @@ export const BoardContainer = styled.main`
     boardSize < 17 ? `1fr 1fr 1fr 1fr` : `1fr 1fr 1fr 1fr 1fr 1fr`};
   grid-template-rows: ${({ boardSize }) =>
     boardSize < 17 ? `1fr 1fr 1fr 1fr` : `1fr 1fr 1fr 1fr 1fr 1fr`};
-  grid-row-gap: 12.29px;
-  grid-column-gap: 12.29px;
-  height: 327px;
+  grid-row-gap: 0.5em;
+  grid-column-gap: 0.5em;
   width: 100%;
+  height: 90vw;
 `;

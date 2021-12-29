@@ -5,7 +5,6 @@ export const Container = styled.footer`
   justify-content: space-between;
   height: 70px;
   width: 100%;
-  margin-top: 6.5em;
 `;
 
 export const DataContainer = styled.div`

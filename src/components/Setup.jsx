@@ -1,86 +1,14 @@
-import Logo from "../assets/logo.svg";
-import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
+import {
+  Container,
+  Img,
+  Menu,
+  Labels,
+  ButtonContainer,
+  OptionButtons,
+  NewGame,
+} from "../styles/setup-styles";
 
-const Menu = styled.div`
-  width: 327px;
-  height: 386px;
-  background-color: #fcfcfc;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100%;
-`;
-
-const Img = styled.svg`
-  background-color: white;
-  mask: url(${Logo}) no-repeat center;
-  height: 40px;
-  width: 150px;
-`;
-
-const Labels = styled.h3`
-  font-size: 15px;
-  color: #7191a5;
-  font-weight: 700;
-  align-self: flex-start;
-`;
-
-const OptionButtons = styled.button`
-  ${(props) =>
-    props.selected
-      ? css`
-           {
-            background-color: #304859;
-          }
-        `
-      : css`
-           {
-            background-color: #bcced9;
-          }
-        `};
-  height: 40px;
-  width: 50%;
-  padding: 5px;
-  background-color: #bcced9;
-  outline: none;
-  border: none;
-  border-radius: 24px;
-  font-weight: 700;
-  color: white;
-  font-size: 16px;
-  text-align: center;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  width: 100%;
-  padding-top: 11px;
-  padding-bottom: 24px;
-  gap: 11px;
-`;
-
-const NewGame = styled.button`
-  color: white;
-  width: 279px;
-  height: 48px;
-  background-color: #fda214;
-  border: none;
-  outline: none;
-  border-radius: 26px;
-  font-size: 18px;
-  font-weight: 700;
-`;
 const Setup = ({ setSettings, setSetup, settings }) => {
   return (
     <Container>

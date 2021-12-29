@@ -1,4 +1,4 @@
-import { Container, Value } from "../styles/Option";
+import { Container, Value } from "../styles/option-styles";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -69,13 +69,15 @@ const Option = ({ index, value, setPicked, picked, matches, settings }) => {
       matches={matches.includes(index)}
     >
       {settings.icon === "icons" ? (
-        <Value>
+        <Value smallText={settings.playerCount > 1}>
           {(chosen || matches.includes(index)) && (
             <FontAwesomeIcon icon={icons[value]} />
           )}
         </Value>
       ) : (
-        <Value>{(chosen || matches.includes(index)) && value}</Value>
+        <Value smallText={settings.playerCount > 1}>
+          {(chosen || matches.includes(index)) && value}
+        </Value>
       )}
     </Container>
   );

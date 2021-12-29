@@ -5,23 +5,10 @@ import GameOver from "./components/GameOver";
 import Menu from "./components/Menu";
 import Setup from "./components/Setup";
 
-import styled from "styled-components";
 import FontStyles from "./fontStyles";
-import { useRef, useState } from "react";
+import { Container } from "./styles/app-styles";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 100%;
-  height: 100vh;
-  padding: 24px;
-  width: 100%;
-  background-color: ${({ setup }) => (setup ? `#152938` : `white`)};
-  filter: ${(props) => (props.showMenu || props.complete) && `brightness(15%)`};
-  z-index: -5;
-`;
+import { useRef, useState } from "react";
 
 function App() {
   // solo only props
@@ -79,6 +66,7 @@ function App() {
           restartGame={restartGame}
           settings={settings}
           setSetup={setSetup}
+          scores={scores}
         />
       )}
       {showMenu && (
@@ -90,11 +78,15 @@ function App() {
       )}
       <Container setup={setup} complete={complete} showMenu={showMenu}>
         {setup ? (
-          <Setup
-            setSetup={setSetup}
-            setSettings={setSettings}
-            settings={settings}
-          />
+          <>
+            <FontStyles />
+
+            <Setup
+              setSetup={setSetup}
+              setSettings={setSettings}
+              settings={settings}
+            />
+          </>
         ) : (
           <>
             <Header setShowMenu={setShowMenu} />

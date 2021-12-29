@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Logo from "../assets/logo.svg";
-import { Container, Img, MenuButton } from "../styles/Header.js";
+import { Container, Img, MenuButton } from "../styles/header-styles.js";
 
 const Header = ({ setShowMenu }) => {
   return (

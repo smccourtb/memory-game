@@ -21,7 +21,6 @@ export const Container = styled.button`
   height: 100%;
   width: 100%;
   border: none;
-  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,6 +28,6 @@ export const Container = styled.button`
 
 export const Value = styled.div`
   color: white;
-  font-size: 40px;
+  font-size: ${({ smallText }) => (smallText ? "24px" : "40px")};
   font-weight: 700;
 `;

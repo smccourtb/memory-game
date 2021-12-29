@@ -1,75 +1,15 @@
-import styled from "styled-components";
 import PropTypes from "prop-types";
+import {
+  StatContainer,
+  DataLabel,
+  DataValue,
+  Container,
+  Restart,
+  NewGame,
+  Header,
+  Message,
+} from "../styles/gameover-styles";
 
-const Container = styled.div`
-  position: absolute;
-  width: 327px;
-  //height: 376px;
-  background-color: white;
-  top: 90px;
-  left: 24px;
-  gap: 8px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  font-weight: 700;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 24px;
-  z-index: 1;
-  border-radius: 10px;
-`;
-
-const Header = styled.h2`
-  font-size: 24px;
-  color: black;
-`;
-
-const Message = styled.p`
-  font-size: 14px;
-  color: #7191a5;
-`;
-
-const StatContainer = styled.div`
-  width: 270px;
-  height: 48px;
-  border-radius: 5px;
-  background-color: ${({ winner }) => (winner ? "#152938" : "#dfe7ec")};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-`;
-const DataLabel = styled.p`
-  color: ${({ winner }) => (winner ? "white" : "#7191a5")};
-  font-size: 13px;
-`;
-const DataValue = styled.p`
-  font-size: 20px;
-  color: ${({ winner }) => (winner ? "white" : "#black")};
-`;
-const Restart = styled.button`
-  color: white;
-  width: 279px;
-  height: 48px;
-  background-color: #fda214;
-  border: none;
-  outline: none;
-  border-radius: 26px;
-  font-size: 18px;
-  font-weight: 700;
-`;
-const NewGame = styled.button`
-  color: #304859;
-  width: 279px;
-  height: 48px;
-  background-color: #dfe7ec;
-  border: none;
-  outline: none;
-  border-radius: 26px;
-  font-size: 18px;
-  font-weight: 700;
-`;
 const GameOver = ({
   time,
   moveCount,
@@ -80,7 +20,6 @@ const GameOver = ({
 }) => {
   const determineHighestScore = () => {
     const highest = Object.values(scores);
-    console.log(highest);
     return Math.max(...highest);
   };
 
@@ -96,20 +35,15 @@ const GameOver = ({
 
   const Players = () => {
     const playerData = sortPlayerRank();
+    const highScore = determineHighestScore();
     return playerData.map((player, idx) => (
-      <StatContainer
-        key={idx}
-        winner={player.score === determineHighestScore()}
-      >
-        <DataLabel winner={player.score === determineHighestScore()}>
-          Player {player.number}
-        </DataLabel>
-        <DataValue winner={player.score === determineHighestScore()}>
-          {player.score} Pairs
-        </DataValue>
+      <StatContainer key={idx} winner={player.score === highScore}>
+        <DataLabel>Player {player.number}</DataLabel>
+        <DataValue>{player.score} Pairs</DataValue>
       </StatContainer>
     ));
   };
+
   return (
     <Container>
       <Header>
@@ -141,6 +75,7 @@ const GameOver = ({
     </Container>
   );
 };
+
 export default GameOver;
 
 GameOver.propTypes = {

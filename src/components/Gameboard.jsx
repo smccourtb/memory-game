@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Option from "./Option";
 
-const GameBoard = ({
+const Gameboard = ({
   startTimer,
   setMoveCount,
   time,
@@ -67,7 +67,7 @@ const GameBoard = ({
       setMoveCount((prevCount) => prevCount + 1);
       return () => clearTimeout(timer);
     }
-    if (matches.length > 14) {
+    if (matches.length > settings.boardSize - 2) {
       console.log("YOU WIN");
       stopTimer();
       setMatches([]);
@@ -96,7 +96,7 @@ const GameBoard = ({
     <BoardContainer boardSize={settings.boardSize}>{choices}</BoardContainer>
   );
 };
-GameBoard.propTypes = {
+Gameboard.propTypes = {
   startTimer: PropTypes.func,
   setMoveCount: PropTypes.func,
   time: PropTypes.number,
@@ -107,4 +107,4 @@ GameBoard.propTypes = {
   setScores: PropTypes.func,
 };
 
-export default GameBoard;
+export default Gameboard;

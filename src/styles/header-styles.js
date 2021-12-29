@@ -6,7 +6,6 @@ export const Container = styled.header`
   align-items: center;
   width: 100%;
   height: 40px;
-  margin-bottom: 5em;
 `;
 
 export const Img = styled.img`
