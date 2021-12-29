@@ -7,22 +7,32 @@ import Setup from "./components/Setup";
 
 import { Container } from "./styles/app-styles";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
   // solo only props
-  const [moveCount, setMoveCount] = useState(0);
-  const [time, setTime] = useState(0);
-  const countRef = useRef(null);
+  const [moveCount, setMoveCount] = useState(0); // gameboard, footer
+  const [time, setTime] = useState(0); // gameboard (to start the timer), footer (display the timer)
+  const countRef = useRef(null); // used for the time
   // multiplayer only props
-  const [playerTurn, setPlayerTurn] = useState(1);
-  const [scores, setScores] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 });
+  const [playerTurn, setPlayerTurn] = useState(1); // gameboard (multi), footer
+  const [scores, setScores] = useState({ 1: 0, 2: 0, 3: 0, 4: 0 }); // gameboard, footer
 
   // indicates the game is over and to show the game over menu
-  const [complete, setComplete] = useState(false);
-
-  const [setup, setSetup] = useState(true);
+  const [showGameOver, setShowGameOver] = useState(false);
+  const [showSetup, setShowSetup] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
+
+  // test
+  const [reset, setReset] = useState(false);
+
+  useEffect(() => {
+    if (reset) {
+      console.log("I'm in App.js");
+      restartGame();
+      setReset(false);
+    }
+  }, [reset]);
 
   const [settings, setSettings] = useState({
     icon: "numbers",
@@ -37,8 +47,8 @@ function App() {
   };
 
   const handleStop = () => {
+    console.log("HI");
     clearInterval(countRef.current);
-    setComplete(true);
   };
 
   const formatTime = (timeToFormat) => {
@@ -52,38 +62,46 @@ function App() {
     handleStop();
     setTime(0);
     setMoveCount(0);
-    setComplete(false);
     setScores({ 1: 0, 2: 0, 3: 0, 4: 0 });
     setPlayerTurn(1);
   };
 
+  useEffect(() => {
+    if (showMenu) {
+      handleStop();
+    } else {
+      handleStart();
+    }
+  }, [showMenu]);
   return (
     <>
-      {complete && (
+      {showGameOver && (
         <GameOver
           time={formatTime(time)}
           moveCount={moveCount}
-          restartGame={restartGame}
+          stopTimer={handleStop}
           settings={settings}
-          setSetup={setSetup}
+          setSetup={setShowSetup}
           scores={scores}
-          setComplete={setComplete}
+          setShowGameOver={setShowGameOver}
+          setReset={setReset}
         />
       )}
       {showMenu && (
         <Menu
-          setSetup={setSetup}
-          restartGame={restartGame}
+          setSetup={setShowSetup}
           setShowMenu={setShowMenu}
+          setReset={setReset}
         />
       )}
-      <Container setup={setup} complete={complete} showMenu={showMenu}>
-        {setup ? (
+      <Container setup={showSetup} complete={showGameOver} showMenu={showMenu}>
+        {showSetup ? (
           <>
             <Setup
-              setSetup={setSetup}
+              setSetup={setShowSetup}
               setSettings={setSettings}
               settings={settings}
+              setReset={setReset}
             />
           </>
         ) : (
@@ -92,12 +110,14 @@ function App() {
             <Gameboard
               time={time}
               startTimer={handleStart}
-              setMoveCount={setMoveCount}
               stopTimer={handleStop}
+              setMoveCount={setMoveCount}
               settings={settings}
               setPlayerTurn={setPlayerTurn}
               playerTurn={playerTurn}
               setScores={setScores}
+              reset={reset}
+              setShowGameOver={setShowGameOver}
             />
             <Footer
               moveCount={moveCount}

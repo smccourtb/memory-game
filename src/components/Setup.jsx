@@ -9,7 +9,7 @@ import {
   NewGame,
 } from "../styles/setup-styles";
 
-const Setup = ({ setSettings, setSetup, settings }) => {
+const Setup = ({ setSettings, setSetup, settings, setReset }) => {
   return (
     <Container>
       <Img />
@@ -111,7 +111,14 @@ const Setup = ({ setSettings, setSetup, settings }) => {
             6x6
           </OptionButtons>
         </ButtonContainer>
-        <NewGame onClick={() => setSetup(false)}>Start Game</NewGame>
+        <NewGame
+          onClick={() => {
+            setSetup(false);
+            setReset(true);
+          }}
+        >
+          Start Game
+        </NewGame>
       </Menu>
     </Container>
   );
@@ -123,4 +130,5 @@ Setup.propTypes = {
   setSettings: PropTypes.func,
   setSetup: PropTypes.func,
   settings: PropTypes.object,
+  setReset: PropTypes.func,
 };

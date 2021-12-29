@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { Container, Buttons } from "../styles/menu-styles";
 
-const Menu = ({ setSetup, setShowMenu, restartGame }) => {
+const Menu = ({ setSetup, setShowMenu, setReset }) => {
   return (
     <Container>
       <Buttons
         onClick={() => {
-          restartGame();
+          setReset(true);
           setShowMenu(false);
         }}
       >
@@ -16,6 +16,7 @@ const Menu = ({ setSetup, setShowMenu, restartGame }) => {
         onClick={() => {
           setShowMenu(false);
           setSetup(true);
+          setReset(true);
         }}
       >
         New Game
@@ -28,7 +29,7 @@ const Menu = ({ setSetup, setShowMenu, restartGame }) => {
 export default Menu;
 
 Menu.propTypes = {
-  restartGame: PropTypes.func,
+  setReset: PropTypes.func,
   setSetup: PropTypes.func,
   setShowMenu: PropTypes.func,
 };

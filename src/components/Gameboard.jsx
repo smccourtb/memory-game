@@ -12,6 +12,8 @@ const Gameboard = ({
   playerTurn,
   setPlayerTurn,
   setScores,
+  reset,
+  setShowGameOver,
 }) => {
   // keeps track of the values that have been selected
   const [picked, setPicked] = useState([]);
@@ -38,6 +40,17 @@ const Gameboard = ({
     }
     return array;
   }
+
+  // for reset
+  useEffect(() => {
+    if (reset) {
+      console.log("I'm in GameBoard.js");
+
+      setMatches([]);
+      setPicked([]);
+      setBoard((prevBoard) => shuffleArray([...prevBoard]));
+    }
+  }, [reset]);
 
   useEffect(() => {
     if (picked.length >= 2) {
@@ -67,14 +80,14 @@ const Gameboard = ({
       setMoveCount((prevCount) => prevCount + 1);
       return () => clearTimeout(timer);
     }
-    if (matches.length > settings.boardSize - 2) {
+    if (matches.length === settings.boardSize) {
       stopTimer();
-      setMatches([]);
-      setPicked([]);
-      setBoard((prevBoard) => shuffleArray([...prevBoard]));
+      setShowGameOver(true);
     }
 
     if (!time && picked.length > 0) {
+      console.log("TIME: ", time);
+      console.log("PICKED LENGTH: ", picked.length);
       startTimer();
     }
   }, [picked]);
@@ -104,6 +117,8 @@ Gameboard.propTypes = {
   playerTurn: PropTypes.number,
   setPlayerTurn: PropTypes.func,
   setScores: PropTypes.func,
+  reset: PropTypes.bool,
+  setShowGameOver: PropTypes.func,
 };
 
 export default Gameboard;

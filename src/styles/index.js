@@ -23,7 +23,6 @@ export const GlobalStyle = createGlobalStyle`
       url(${AtkinsonBoldWoff2})format('woff2');
       }
     }
-
   }
 
   code {

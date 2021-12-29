@@ -13,10 +13,11 @@ import {
 const GameOver = ({
   time,
   moveCount,
-  restartGame,
   setSetup,
   scores,
   settings,
+  setReset,
+  setShowGameOver,
 }) => {
   const determineHighestScore = () => {
     const highest = Object.values(scores);
@@ -54,7 +55,7 @@ const GameOver = ({
       <Message>
         {settings.playerCount > 1
           ? `Game over! Here are the results...`
-          : `Game over! Heres how you got on...`}
+          : `Game over! Here's how you got on...`}
       </Message>
       {settings.playerCount > 1 ? (
         [Players()]
@@ -70,8 +71,23 @@ const GameOver = ({
           </StatContainer>
         </>
       )}
-      <Restart onClick={restartGame}>Restart</Restart>
-      <NewGame onClick={() => setSetup(true)}>Setup New Game</NewGame>
+      <Restart
+        onClick={() => {
+          setReset(true);
+          setShowGameOver(false);
+        }}
+      >
+        Restart
+      </Restart>
+      <NewGame
+        onClick={() => {
+          setShowGameOver(false);
+          setSetup(true);
+          setReset(true);
+        }}
+      >
+        Setup New Game
+      </NewGame>
     </Container>
   );
 };
@@ -81,8 +97,9 @@ export default GameOver;
 GameOver.propTypes = {
   moveCount: PropTypes.number,
   time: PropTypes.string,
-  restartGame: PropTypes.func,
+  setReset: PropTypes.func,
   setSetup: PropTypes.func,
   scores: PropTypes.object,
   settings: PropTypes.object,
+  setShowGameOver: PropTypes.func,
 };
