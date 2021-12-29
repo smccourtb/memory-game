@@ -68,7 +68,6 @@ const Gameboard = ({
       return () => clearTimeout(timer);
     }
     if (matches.length > settings.boardSize - 2) {
-      console.log("YOU WIN");
       stopTimer();
       setMatches([]);
       setPicked([]);

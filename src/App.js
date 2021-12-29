@@ -5,7 +5,6 @@ import GameOver from "./components/GameOver";
 import Menu from "./components/Menu";
 import Setup from "./components/Setup";
 
-import FontStyles from "./fontStyles";
 import { Container } from "./styles/app-styles";
 
 import { useRef, useState } from "react";
@@ -54,11 +53,12 @@ function App() {
     setTime(0);
     setMoveCount(0);
     setComplete(false);
+    setScores({ 1: 0, 2: 0, 3: 0, 4: 0 });
+    setPlayerTurn(1);
   };
 
   return (
     <>
-      <FontStyles />
       {complete && (
         <GameOver
           time={formatTime(time)}
@@ -67,6 +67,7 @@ function App() {
           settings={settings}
           setSetup={setSetup}
           scores={scores}
+          setComplete={setComplete}
         />
       )}
       {showMenu && (
@@ -79,8 +80,6 @@ function App() {
       <Container setup={setup} complete={complete} showMenu={showMenu}>
         {setup ? (
           <>
-            <FontStyles />
-
             <Setup
               setSetup={setSetup}
               setSettings={setSettings}

@@ -14,8 +14,8 @@ const Menu = ({ setSetup, setShowMenu, restartGame }) => {
       </Buttons>
       <Buttons
         onClick={() => {
-          setSetup(true);
           setShowMenu(false);
+          setSetup(true);
         }}
       >
         New Game
