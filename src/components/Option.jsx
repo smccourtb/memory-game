@@ -43,7 +43,15 @@ const icons = {
   16: faSkull,
   17: faRocket,
 };
-const Option = ({ index, value, setPicked, picked, matches, settings }) => {
+const Option = ({
+  index,
+  value,
+  setPicked,
+  picked,
+  matches,
+  settings,
+  reset,
+}) => {
   const [chosen, setChosen] = useState(false);
 
   const optionChosen = () => {
@@ -61,6 +69,12 @@ const Option = ({ index, value, setPicked, picked, matches, settings }) => {
       return () => clearTimeout(timer);
     }
   }, [picked]);
+
+  useEffect(() => {
+    if (reset) {
+      setChosen(false);
+    }
+  }, [reset]);
 
   return (
     <Container
@@ -90,6 +104,7 @@ Option.propTypes = {
   picked: PropTypes.array,
   matches: PropTypes.array,
   settings: PropTypes.object,
+  reset: PropTypes.bool,
 };
 
 export default Option;

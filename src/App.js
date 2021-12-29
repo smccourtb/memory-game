@@ -28,7 +28,6 @@ function App() {
 
   useEffect(() => {
     if (reset) {
-      console.log("I'm in App.js");
       restartGame();
       setReset(false);
     }
@@ -47,7 +46,6 @@ function App() {
   };
 
   const handleStop = () => {
-    console.log("HI");
     clearInterval(countRef.current);
   };
 
@@ -70,7 +68,9 @@ function App() {
     if (showMenu) {
       handleStop();
     } else {
-      handleStart();
+      if (!reset) {
+        handleStart();
+      }
     }
   }, [showMenu]);
   return (

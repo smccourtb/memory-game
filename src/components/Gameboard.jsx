@@ -44,8 +44,7 @@ const Gameboard = ({
   // for reset
   useEffect(() => {
     if (reset) {
-      console.log("I'm in GameBoard.js");
-
+      stopTimer();
       setMatches([]);
       setPicked([]);
       setBoard((prevBoard) => shuffleArray([...prevBoard]));
@@ -86,8 +85,6 @@ const Gameboard = ({
     }
 
     if (!time && picked.length > 0) {
-      console.log("TIME: ", time);
-      console.log("PICKED LENGTH: ", picked.length);
       startTimer();
     }
   }, [picked]);
@@ -101,6 +98,7 @@ const Gameboard = ({
       picked={picked}
       matches={matches}
       settings={settings}
+      reset={reset}
     />
   ));
 

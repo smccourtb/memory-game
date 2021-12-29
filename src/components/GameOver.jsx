@@ -34,6 +34,14 @@ const GameOver = ({
     return players;
   };
 
+  const checkForTie = () => {
+    const playerScores = Object.values(sortPlayerRank());
+    const results = playerScores.filter(
+      (score) => score.score === playerScores[0].score
+    );
+    return results.length > 1;
+  };
+
   const Players = () => {
     const playerData = sortPlayerRank();
     const highScore = determineHighestScore();
@@ -48,7 +56,9 @@ const GameOver = ({
   return (
     <Container>
       <Header>
-        {settings.playerCount > 1
+        {checkForTie()
+          ? "It's a tie!"
+          : settings.playerCount > 1
           ? `Player ${sortPlayerRank()[0].number} Wins!`
           : `You did it!`}
       </Header>
