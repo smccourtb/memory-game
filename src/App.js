@@ -5,7 +5,7 @@ import GameOver from "./components/GameOver";
 import Menu from "./components/Menu";
 import Setup from "./components/Setup";
 
-import { Container } from "./styles/app-styles";
+import { Container, Main, MenuContainer } from "./styles/app-styles";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -74,39 +74,44 @@ function App() {
     }
   }, [showMenu]);
   return (
-    <>
-      {showGameOver && (
-        <GameOver
-          time={formatTime(time)}
-          moveCount={moveCount}
-          stopTimer={handleStop}
-          settings={settings}
-          setSetup={setShowSetup}
-          scores={scores}
-          setShowGameOver={setShowGameOver}
-          setReset={setReset}
-        />
-      )}
-      {showMenu && (
-        <Menu
-          setSetup={setShowSetup}
-          setShowMenu={setShowMenu}
-          setReset={setReset}
-        />
-      )}
+    <Main>
+      <MenuContainer>
+        {" "}
+        {showGameOver && (
+          <GameOver
+            time={formatTime(time)}
+            moveCount={moveCount}
+            stopTimer={handleStop}
+            settings={settings}
+            setSetup={setShowSetup}
+            scores={scores}
+            setShowGameOver={setShowGameOver}
+            setReset={setReset}
+          />
+        )}
+        {showMenu && (
+          <Menu
+            setSetup={setShowSetup}
+            setShowMenu={setShowMenu}
+            setReset={setReset}
+          />
+        )}
+      </MenuContainer>
       <Container setup={showSetup} complete={showGameOver} showMenu={showMenu}>
         {showSetup ? (
-          <>
-            <Setup
-              setSetup={setShowSetup}
-              setSettings={setSettings}
-              settings={settings}
-              setReset={setReset}
-            />
-          </>
+          <Setup
+            setShowSetup={setShowSetup}
+            setSettings={setSettings}
+            settings={settings}
+            setReset={setReset}
+          />
         ) : (
           <>
-            <Header setShowMenu={setShowMenu} />
+            <Header
+              setShowMenu={setShowMenu}
+              setReset={setReset}
+              setShowSetup={setShowSetup}
+            />
             <Gameboard
               time={time}
               startTimer={handleStart}
@@ -129,7 +134,7 @@ function App() {
           </>
         )}
       </Container>
-    </>
+    </Main>
   );
 }
 

@@ -34,4 +34,10 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Atkinson Hyperlegible', sans-serif;
   }
+
+  button {
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+
+  }
 `;

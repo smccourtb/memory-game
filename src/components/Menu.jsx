@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Container, Buttons } from "../styles/menu-styles";
+import { Container } from "../styles/menu-styles";
 import { Restart, NewGame } from "../styles/gameover-styles";
 
 const Menu = ({ setSetup, setShowMenu, setReset }) => {

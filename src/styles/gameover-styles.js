@@ -1,15 +1,8 @@
 import styled from "styled-components/macro";
 
-export const Container = styled.div`
-  position: absolute;
-  width: 327px;
+export const MenuContainer = styled.div`
   background-color: white;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  top: 33%;
-  gap: 8px;
+  gap: 24px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -19,6 +12,7 @@ export const Container = styled.div`
   padding: 24px;
   z-index: 1;
   border-radius: 10px;
+  width: 100%;
 `;
 
 export const Header = styled.h2`
@@ -80,4 +74,24 @@ export const NewGame = styled.button`
     background-color: #6395b8;
     color: white;
   }
+`;
+
+export const WinText = styled.header`
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 9px;
+`;
+
+export const StatGroup = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 `;

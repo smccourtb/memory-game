@@ -1,11 +1,7 @@
 import styled from "styled-components/macro";
 
 export const Container = styled.div`
-  width: 327px;
-  height: 224px;
-  position: absolute;
-  top: 222px;
-  left: 24px;
+  width: 100%;
   background-color: white;
   padding: 24px;
   gap: 16px;

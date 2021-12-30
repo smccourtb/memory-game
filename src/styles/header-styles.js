@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Restart, NewGame } from "./gameover-styles";
 
 export const Container = styled.header`
   display: flex;
@@ -34,4 +35,20 @@ export const MenuButton = styled.button`
   &:hover {
     background-color: #ffb84a;
   }
+`;
+
+export const MenuRestart = styled(Restart)`
+  width: 149px;
+  height: 52px;
+`;
+
+export const MenuNewGame = styled(NewGame)`
+  width: 149px;
+  height: 52px;
+`;
+
+export const ButtonGroup = styled.div`
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
 `;

@@ -3,11 +3,14 @@ import {
   StatContainer,
   DataLabel,
   DataValue,
-  Container,
+  MenuContainer,
   Restart,
   NewGame,
   Header,
   Message,
+  WinText,
+  StatGroup,
+  ButtonContainer,
 } from "../styles/gameover-styles";
 
 const GameOver = ({
@@ -47,30 +50,34 @@ const GameOver = ({
     const highScore = determineHighestScore();
     return playerData.map((player, idx) => (
       <StatContainer key={idx} winner={player.score === highScore}>
-        <DataLabel>Player {player.number}</DataLabel>
+        <DataLabel>
+          Player {player.number} {player.score === highScore && "(Winner!)"}
+        </DataLabel>
         <DataValue>{player.score} Pairs</DataValue>
       </StatContainer>
     ));
   };
 
   return (
-    <Container>
-      <Header>
-        {checkForTie()
-          ? "It's a tie!"
-          : settings.playerCount > 1
-          ? `Player ${sortPlayerRank()[0].number} Wins!`
-          : `You did it!`}
-      </Header>
-      <Message>
-        {settings.playerCount > 1
-          ? `Game over! Here are the results...`
-          : `Game over! Here's how you got on...`}
-      </Message>
+    <MenuContainer>
+      <WinText>
+        <Header>
+          {checkForTie()
+            ? "It's a tie!"
+            : settings.playerCount > 1
+            ? `Player ${sortPlayerRank()[0].number} Wins!`
+            : `You did it!`}
+        </Header>
+        <Message>
+          {settings.playerCount > 1
+            ? `Game over! Here are the results...`
+            : `Game over! Here's how you got on...`}
+        </Message>
+      </WinText>
       {settings.playerCount > 1 ? (
-        [Players()]
+        <StatGroup>{[Players()]}</StatGroup>
       ) : (
-        <>
+        <StatGroup>
           <StatContainer>
             <DataLabel>Time Elapsed</DataLabel>
             <DataValue>{time}</DataValue>
@@ -79,26 +86,28 @@ const GameOver = ({
             <DataLabel>Moves Taken</DataLabel>
             <DataValue>{`${moveCount} Moves`}</DataValue>
           </StatContainer>
-        </>
+        </StatGroup>
       )}
-      <Restart
-        onClick={() => {
-          setReset(true);
-          setShowGameOver(false);
-        }}
-      >
-        Restart
-      </Restart>
-      <NewGame
-        onClick={() => {
-          setShowGameOver(false);
-          setSetup(true);
-          setReset(true);
-        }}
-      >
-        Setup New Game
-      </NewGame>
-    </Container>
+      <ButtonContainer>
+        <Restart
+          onClick={() => {
+            setReset(true);
+            setShowGameOver(false);
+          }}
+        >
+          Restart
+        </Restart>
+        <NewGame
+          onClick={() => {
+            setShowGameOver(false);
+            setSetup(true);
+            setReset(true);
+          }}
+        >
+          Setup New Game
+        </NewGame>
+      </ButtonContainer>
+    </MenuContainer>
   );
 };
 
