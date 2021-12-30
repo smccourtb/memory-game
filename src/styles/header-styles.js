@@ -30,4 +30,8 @@ export const MenuButton = styled.button`
   font-size: 16px;
   line-height: 20px;
   text-align: center;
+
+  &:hover {
+    background-color: #ffb84a;
+  }
 `;

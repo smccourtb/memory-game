@@ -1,18 +1,19 @@
 import PropTypes from "prop-types";
 import { Container, Buttons } from "../styles/menu-styles";
+import { Restart, NewGame } from "../styles/gameover-styles";
 
 const Menu = ({ setSetup, setShowMenu, setReset }) => {
   return (
     <Container>
-      <Buttons
+      <Restart
         onClick={() => {
           setReset(true);
           setShowMenu(false);
         }}
       >
         Restart
-      </Buttons>
-      <Buttons
+      </Restart>
+      <NewGame
         onClick={() => {
           setShowMenu(false);
           setSetup(true);
@@ -20,8 +21,8 @@ const Menu = ({ setSetup, setShowMenu, setReset }) => {
         }}
       >
         New Game
-      </Buttons>
-      <Buttons onClick={() => setShowMenu(false)}>Resume Game</Buttons>
+      </NewGame>
+      <NewGame onClick={() => setShowMenu(false)}>Resume Game</NewGame>
     </Container>
   );
 };

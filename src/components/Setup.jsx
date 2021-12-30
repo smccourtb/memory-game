@@ -6,7 +6,7 @@ import {
   Labels,
   ButtonContainer,
   OptionButtons,
-  NewGame,
+  StartGame,
 } from "../styles/setup-styles";
 
 const Setup = ({ setSettings, setSetup, settings, setReset }) => {
@@ -111,14 +111,14 @@ const Setup = ({ setSettings, setSetup, settings, setReset }) => {
             6x6
           </OptionButtons>
         </ButtonContainer>
-        <NewGame
+        <StartGame
           onClick={() => {
             setSetup(false);
             setReset(true);
           }}
         >
           Start Game
-        </NewGame>
+        </StartGame>
       </Menu>
     </Container>
   );

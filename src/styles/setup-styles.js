@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import Logo from "../assets/logo.svg";
 
 export const Menu = styled.div`
@@ -46,6 +46,10 @@ export const OptionButtons = styled.button`
   color: white;
   font-size: 16px;
   text-align: center;
+
+  &:hover {
+    background-color: ${({ selected }) => (selected ? "#304859" : "#6395b8")};
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -56,7 +60,7 @@ export const ButtonContainer = styled.div`
   gap: 11px;
 `;
 
-export const NewGame = styled.button`
+export const StartGame = styled.button`
   color: white;
   width: 100%;
   height: 48px;
@@ -65,4 +69,10 @@ export const NewGame = styled.button`
   border-radius: 24px;
   font-size: 18px;
   font-weight: 700;
+
+  &:hover {
+    background-color: #ffb84a;
+  }
+
+  //  this can is the same as Restart in gameover-styles
 `;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Container = styled.div`
   width: 327px;
@@ -13,18 +13,4 @@ export const Container = styled.div`
   flex-direction: column;
   border-radius: 10px;
   z-index: 1;
-`;
-
-export const Buttons = styled.button`
-  width: 100%;
-  height: 48px;
-  background-color: #dfe7ec;
-  color: #304859;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: 0;
-  text-align: center;
-  border-radius: 24px;
-  border: none;
 `;

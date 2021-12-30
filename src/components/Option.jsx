@@ -83,13 +83,13 @@ const Option = ({
       matches={matches.includes(index)}
     >
       {settings.icon === "icons" ? (
-        <Value smallText={settings.playerCount > 1}>
+        <Value smallText={settings.boardSize > 16}>
           {(chosen || matches.includes(index)) && (
             <FontAwesomeIcon icon={icons[value]} />
           )}
         </Value>
       ) : (
-        <Value smallText={settings.playerCount > 1}>
+        <Value smallText={settings.boardSize > 16}>
           {(chosen || matches.includes(index)) && value}
         </Value>
       )}

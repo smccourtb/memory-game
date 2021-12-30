@@ -1,22 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.button`
-  ${(props) =>
-    props.chosen
-      ? css`
-           {
-            background-color: #fda214;
-          }
-        `
-      : css`
-           {
-            background-color: #304859;
-          }
-        `};
-  ${(props) =>
-    props.matches &&
-    css`{
-            background-color: #BCCED9`};
+  background-color: ${({ chosen }) => (chosen ? "#fda214" : "#304859")};
+  background-color: ${({ matches }) => matches && "#bcced9"};
   border-radius: 50%;
   height: 100%;
   width: 100%;
@@ -24,6 +10,11 @@ export const Container = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    background-color: ${({ matches, chosen }) =>
+      !(matches || chosen) && "#6395b8"};
+  }
 `;
 
 export const Value = styled.div`

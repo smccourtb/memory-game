@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Container = styled.div`
   position: absolute;
@@ -53,24 +53,31 @@ export const DataValue = styled.p`
 
 export const Restart = styled.button`
   color: white;
-  width: 279px;
+  width: 100%;
   height: 48px;
   background-color: #fda214;
   border: none;
-  outline: none;
   border-radius: 26px;
   font-size: 18px;
   font-weight: 700;
+
+  &:hover {
+    background-color: #ffb84a;
+  }
 `;
 
 export const NewGame = styled.button`
   color: #304859;
-  width: 279px;
+  width: 100%;
   height: 48px;
   background-color: #dfe7ec;
   border: none;
-  outline: none;
   border-radius: 26px;
   font-size: 18px;
   font-weight: 700;
+
+  &:hover {
+    background-color: #6395b8;
+    color: white;
+  }
 `;
