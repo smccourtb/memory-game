@@ -3,9 +3,12 @@ import {
   DataContainer,
   Title,
   Value,
+  PlayerCardContainer,
+  CurrentLabel,
 } from "../styles/footer-styles";
 import PropTypes from "prop-types";
 import PlayerCard from "./PlayerCard";
+import MediaQuery from "react-responsive";
 
 const Footer = ({ moveCount, time, settings, playerTurn, scores }) => {
   const players = () => {
@@ -17,12 +20,12 @@ const Footer = ({ moveCount, time, settings, playerTurn, scores }) => {
   };
 
   const playerCards = players().map((player) => (
-    <PlayerCard
-      key={player}
-      number={player}
-      playerTurn={playerTurn}
-      score={scores}
-    />
+    <PlayerCardContainer key={player} active={player === playerTurn}>
+      <PlayerCard number={player} playerTurn={playerTurn} score={scores} />
+      <CurrentLabel active={player === playerTurn}>
+        <MediaQuery query="(min-width: 1440px)">CURRENT TURN</MediaQuery>
+      </CurrentLabel>
+    </PlayerCardContainer>
   ));
 
   return (

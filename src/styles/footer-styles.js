@@ -4,12 +4,13 @@ export const Container = styled.footer`
   display: flex;
   justify-content: center;
   gap: 23px;
-  height: 70px;
   width: 100%;
   @media (min-width: 768px) {
-    //width: 75%;
     padding: ${({ solo }) => solo && "0 74px"};
     gap: 30px;
+  }
+  @media (min-width: 1440px) {
+    padding: ${({ solo }) => solo && "0 285px"};
   }
 `;
 
@@ -50,5 +51,26 @@ export const Value = styled.p`
   color: #304859;
   @media (min-width: 768px) {
     font-size: 32px;
+  }
+`;
+
+export const CurrentLabel = styled.small`
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 5px;
+  color: ${({ active }) => (active ? "#152938" : "white")};
+  padding: 0 35px;
+`;
+
+export const PlayerCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 768px) {
+    gap: 23px;
   }
 `;

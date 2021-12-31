@@ -17,6 +17,8 @@ export const MenuContainer = styled.div`
   @media (min-width: 768px) {
     padding: 51px 56px 69px;
     gap: 40px;
+    border-radius: 20px;
+    max-width: 654px;
   }
 `;
 
