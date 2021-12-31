@@ -30,7 +30,7 @@ const GameOver = ({
   const sortPlayerRank = () => {
     let playerScores = Object.values(scores);
     let players = [];
-    for (let i = 0; i < playerScores.length; i++) {
+    for (let i = 0; i < settings.playerCount; i++) {
       players.push({ number: i + 1, score: playerScores[i] });
     }
     players.sort((a, b) => (a.score < b.score ? 1 : -1));
