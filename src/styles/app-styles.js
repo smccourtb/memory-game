@@ -4,16 +4,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: ${({ setup }) => (!setup ? "space-between" : `center`)};
   min-height: 100%;
   height: 100vh;
   padding: 24px;
   width: 100%;
   background-color: ${({ setup }) => (setup ? `#152938` : `white`)};
-  filter: ${(props) => (props.showMenu || props.complete) && `brightness(15%)`};
+  filter: ${({ showMenu, complete }) =>
+    (showMenu || complete) && `brightness(15%)`};
   z-index: 0;
   @media (min-width: 768px) {
-    padding: 57px;
+    padding: 40px;
   }
 `;
 
@@ -30,4 +31,8 @@ export const MenuContainer = styled.div`
   width: 100vw;
   position: absolute;
   padding: 24px;
+
+  @media (min-width: 768px) {
+    padding: 56px;
+  }
 `;

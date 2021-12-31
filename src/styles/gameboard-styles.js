@@ -15,6 +15,7 @@ export const BoardContainer = styled.main`
   max-height: 30em;
   height: 90vw;
   @media (min-width: 768px) {
-    gap: 1.1em;
+    grid-row-gap: ${({ boardSize }) => (boardSize < 17 ? "1em" : ".6em")};
+    grid-column-gap: ${({ boardSize }) => (boardSize < 17 ? "1em" : ".6em")};
   }
 `;

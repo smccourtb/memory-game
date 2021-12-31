@@ -26,7 +26,7 @@ const Footer = ({ moveCount, time, settings, playerTurn, scores }) => {
   ));
 
   return (
-    <Container>
+    <Container solo={settings.playerCount < 2}>
       {settings.playerCount < 2 ? (
         <>
           <DataContainer role="time-container">

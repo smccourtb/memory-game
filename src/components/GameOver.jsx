@@ -53,7 +53,9 @@ const GameOver = ({
         <DataLabel>
           Player {player.number} {player.score === highScore && "(Winner!)"}
         </DataLabel>
-        <DataValue>{player.score} Pairs</DataValue>
+        <DataValue winner={player.score === highScore}>
+          {player.score} Pairs
+        </DataValue>
       </StatContainer>
     ));
   };

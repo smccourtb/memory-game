@@ -33,6 +33,7 @@ export const Menu = styled.div`
   @media (min-width: 768px) {
     gap: 32px;
     padding: 56px;
+    max-width: 654px;
   }
 `;
 

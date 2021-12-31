@@ -7,7 +7,8 @@ export const Container = styled.footer`
   height: 70px;
   width: 100%;
   @media (min-width: 768px) {
-    width: 75%;
+    //width: 75%;
+    padding: ${({ solo }) => solo && "0 74px"};
     gap: 30px;
   }
 `;
