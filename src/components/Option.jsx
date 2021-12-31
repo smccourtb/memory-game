@@ -1,4 +1,4 @@
-import { Container, Value } from "../styles/Option";
+import { Container, Value } from "../styles/option-styles";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,7 +43,15 @@ const icons = {
   16: faSkull,
   17: faRocket,
 };
-const Option = ({ index, value, setPicked, picked, matches, settings }) => {
+const Option = ({
+  index,
+  value,
+  setPicked,
+  picked,
+  matches,
+  settings,
+  reset,
+}) => {
   const [chosen, setChosen] = useState(false);
 
   const optionChosen = () => {
@@ -62,6 +70,12 @@ const Option = ({ index, value, setPicked, picked, matches, settings }) => {
     }
   }, [picked]);
 
+  useEffect(() => {
+    if (reset) {
+      setChosen(false);
+    }
+  }, [reset]);
+
   return (
     <Container
       onClick={optionChosen}
@@ -69,13 +83,15 @@ const Option = ({ index, value, setPicked, picked, matches, settings }) => {
       matches={matches.includes(index)}
     >
       {settings.icon === "icons" ? (
-        <Value>
+        <Value smallText={settings.boardSize > 16}>
           {(chosen || matches.includes(index)) && (
             <FontAwesomeIcon icon={icons[value]} />
           )}
         </Value>
       ) : (
-        <Value>{(chosen || matches.includes(index)) && value}</Value>
+        <Value smallText={settings.boardSize > 16}>
+          {(chosen || matches.includes(index)) && value}
+        </Value>
       )}
     </Container>
   );
@@ -88,6 +104,7 @@ Option.propTypes = {
   picked: PropTypes.array,
   matches: PropTypes.array,
   settings: PropTypes.object,
+  reset: PropTypes.bool,
 };
 
 export default Option;

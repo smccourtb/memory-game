@@ -1,9 +1,9 @@
-import { BoardContainer } from "../styles/Gameboard";
+import { BoardContainer } from "../styles/gameboard-styles";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import Option from "./Option";
 
-const GameBoard = ({
+const Gameboard = ({
   startTimer,
   setMoveCount,
   time,
@@ -12,13 +12,15 @@ const GameBoard = ({
   playerTurn,
   setPlayerTurn,
   setScores,
-  scores,
+  reset,
+  setShowGameOver,
 }) => {
+  // keeps track of the values that have been selected
   const [picked, setPicked] = useState([]);
+  // keeps track of correctly selected pairs
   const [matches, setMatches] = useState([]);
 
-  // create an array with the length of 16.
-  // create 8 pairs of numbers (array.length/2)
+  // create an array with the pairs of numbers based on a given size
   const createBoard = (boardSize) => {
     const boardArray = [];
     for (let i = 0; i < boardSize; i++) {
@@ -26,6 +28,7 @@ const GameBoard = ({
     }
     return boardArray;
   };
+
   const [board, setBoard] = useState(
     shuffleArray(createBoard(settings.boardSize / 2))
   );
@@ -38,20 +41,34 @@ const GameBoard = ({
     return array;
   }
 
+  // for reset
+  useEffect(() => {
+    if (reset) {
+      stopTimer();
+      setMatches([]);
+      setPicked([]);
+      setBoard((prevBoard) => shuffleArray([...prevBoard]));
+    }
+  }, [reset]);
+
   useEffect(() => {
     if (picked.length >= 2) {
+      // resets picked state to empty array after .5 seconds
       const timer = setTimeout(() => setPicked([]), 500);
+
+      // if user finds a matching pair
       if (picked[0].value === picked[1].value) {
+        // add to the matches array
         setMatches((prev) => [...prev, picked[0].index, picked[1].index]);
-        scores[playerTurn]++;
-        setScores((prevScores) => ({
-          ...prevScores,
-        }));
+        setScores((prevScores) => {
+          const prev = { ...prevScores };
+          prev[playerTurn]++;
+          return prev;
+        });
       } else {
         if (settings.playerCount > 1) {
           setPlayerTurn(() => {
             if (playerTurn < settings.playerCount) {
-              console.log("SHOULD INCREMENT");
               return playerTurn + 1;
             }
             return 1;
@@ -62,19 +79,16 @@ const GameBoard = ({
       setMoveCount((prevCount) => prevCount + 1);
       return () => clearTimeout(timer);
     }
-    if (matches.length > 14) {
-      console.log("YOU WIN");
+    if (matches.length === settings.boardSize) {
       stopTimer();
-      setMatches([]);
-      setPicked([]);
-      setBoard((prevBoard) => shuffleArray([...prevBoard]));
+      setShowGameOver(true);
     }
 
-    if (time === "0 : 00" && picked.length > 0) {
+    if (!time && picked.length > 0) {
       startTimer();
-      // set player1 active
     }
   }, [picked]);
+
   const choices = board.map((optionValue, index) => (
     <Option
       key={index}
@@ -84,24 +98,25 @@ const GameBoard = ({
       picked={picked}
       matches={matches}
       settings={settings}
+      reset={reset}
     />
   ));
+
   return (
     <BoardContainer boardSize={settings.boardSize}>{choices}</BoardContainer>
   );
 };
-
-GameBoard.propTypes = {
+Gameboard.propTypes = {
   startTimer: PropTypes.func,
   setMoveCount: PropTypes.func,
-  time: PropTypes.string,
+  time: PropTypes.number,
   stopTimer: PropTypes.func,
-  reset: PropTypes.bool,
   settings: PropTypes.object,
   playerTurn: PropTypes.number,
   setPlayerTurn: PropTypes.func,
   setScores: PropTypes.func,
-  scores: PropTypes.object,
+  reset: PropTypes.bool,
+  setShowGameOver: PropTypes.func,
 };
 
-export default GameBoard;
+export default Gameboard;

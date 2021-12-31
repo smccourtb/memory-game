@@ -1,20 +1,36 @@
-import { Container, DataContainer, Title, Value } from "../styles/Footer";
+import {
+  Container,
+  DataContainer,
+  Title,
+  Value,
+  PlayerCardContainer,
+  CurrentLabel,
+} from "../styles/footer-styles";
 import PropTypes from "prop-types";
 import PlayerCard from "./PlayerCard";
+import MediaQuery from "react-responsive";
 
 const Footer = ({ moveCount, time, settings, playerTurn, scores }) => {
   const players = () => {
     const cards = [];
     for (let i = 1; i < settings.playerCount + 1; i++) {
-      cards.push(
-        <PlayerCard number={i} playerTurn={playerTurn} score={scores} />
-      );
+      cards.push(i);
     }
     return cards;
   };
+
+  const playerCards = players().map((player) => (
+    <PlayerCardContainer key={player} active={player === playerTurn}>
+      <PlayerCard number={player} playerTurn={playerTurn} score={scores} />
+      <CurrentLabel active={player === playerTurn}>
+        <MediaQuery query="(min-width: 1440px)">CURRENT TURN</MediaQuery>
+      </CurrentLabel>
+    </PlayerCardContainer>
+  ));
+
   return (
-    <Container>
-      {settings.playerCount < 1 ? (
+    <Container solo={settings.playerCount < 2}>
+      {settings.playerCount < 2 ? (
         <>
           <DataContainer role="time-container">
             <Title>Time</Title>
@@ -26,7 +42,7 @@ const Footer = ({ moveCount, time, settings, playerTurn, scores }) => {
           </DataContainer>
         </>
       ) : (
-        [players()]
+        [playerCards]
       )}
     </Container>
   );

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Restart, NewGame } from "./gameover-styles";
 
 export const Container = styled.header`
   display: flex;
@@ -6,15 +7,19 @@ export const Container = styled.header`
   align-items: center;
   width: 100%;
   height: 40px;
-  margin-bottom: 5em;
+  @media (min-width: 768px) {
+    height: 50px;
+  }
 `;
 
 export const Img = styled.img`
   width: 92px;
+  @media (min-width: 768px) {
+    width: 154px;
+  }
 `;
 
 export const MenuButton = styled.button`
-  font-family: "Atkinson Hyperlegible";
   background-color: #fda214;
   color: #fcfcfc;
   border: none;
@@ -26,4 +31,24 @@ export const MenuButton = styled.button`
   font-size: 16px;
   line-height: 20px;
   text-align: center;
+
+  &:hover {
+    background-color: #ffb84a;
+  }
+`;
+
+export const MenuRestart = styled(Restart)`
+  width: 149px;
+  height: 52px;
+`;
+
+export const MenuNewGame = styled(NewGame)`
+  width: 149px;
+  height: 52px;
+`;
+
+export const ButtonGroup = styled.div`
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
 `;
